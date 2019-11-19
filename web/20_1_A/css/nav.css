@@ -1,0 +1,19 @@
+nav{
+    background-color: #3c3c3c;
+    height: 30px;
+    display: flex;
+    
+}
+nav .nav-text{
+    color: #aeaeae;
+}
+nav .logo{
+    color: #229ce6 !important;
+    font-size: 1.2rem;
+}
+nav .nav-items{
+    padding: 0 .5rem;
+}
+.nav-items:hover{
+    background-color: rgba(174, 174, 174,.2);
+}

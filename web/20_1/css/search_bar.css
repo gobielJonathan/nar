@@ -1,0 +1,29 @@
+.search-bar {
+    background-color: #323639;
+    height: 47px;
+}
+
+.search-bar-action {
+    width: 221px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar-items {
+    font-size: 1.2rem;
+    color: white;
+}
+
+.search-bar-input input {
+    background-color: #282c2f;
+    border: 0;
+    border-radius: 20px;
+    color: white;
+}
+
+.search-bar-input input:focus {
+    outline: none !important;
+    border: 1px solid rgb(0, 86, 179);
+}

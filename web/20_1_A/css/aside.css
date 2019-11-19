@@ -1,0 +1,23 @@
+aside{
+    width: 75px;
+    background-color: #333333;
+    height: 100%;
+}
+.aside-items{
+    text-align: center;
+    position: relative;
+    padding: .25rem 0;
+}
+.aside-items.active{
+    border-left: 2px solid white;
+}
+.aside-items-logo{
+    display: inline-block;
+    color: white;
+    font-size: 1.5rem
+}
+.aside-items .badge{
+    position: absolute;
+    bottom: 0;
+    right: 15%;
+}

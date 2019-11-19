@@ -1,0 +1,37 @@
+.sub-header {
+    overflow-x: auto;
+}
+
+.nav-tabs {
+    border-bottom: none !important;
+}
+
+.nav-link {
+    color: white !important;
+    border: none !important;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    font-size: .9rem;
+    background-color: #202124 !important;
+    transition: .6s all cubic-bezier(0.075, 0.82, 0.165, 1);
+    padding-right: 8px !important;
+}
+
+.nav-link .nav-link-icon {
+    color: grey;
+}
+
+.nav-link.active {
+    border-top-left-radius: .5rem !important;
+    border-top-right-radius: .5rem !important;
+    padding-right: 0;
+    box-shadow: inset 250px 0 0 #323639;
+}
+
+.nav-link.active .spread{
+    display: none !important;
+}
+.nav-link.active .nav-link-icon {
+    color: white;
+}

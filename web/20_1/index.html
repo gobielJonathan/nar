@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/nav_tab.css">
+    <link rel="stylesheet" href="./css/search_bar.css">
+    <link rel="stylesheet" href="./css/bookmarks.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="sub-header px-1 pt-2">
+            <nav class="nav nav-tabs nav-stacked" style="flex-wrap: nowrap;">
+
+                <button class="btn bg-transparent ml-2 pl-0 text-white" id="add-tab-btn" style="font-size: small;">
+                    <i class="fa fa-plus hover" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+
+        <div class="search-bar d-flex pr-2">
+            <div class="search-bar-action px-3">
+                <div class="search-bar-items hover">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </div>
+                <div class="search-bar-items hover">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </div>
+                <div class="search-bar-items hover">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </div>
+                <div class="search-bar-items hover">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="search-bar-input w-100 my-2">
+                <input type="text" class="h-100 w-100 px-3" id="search-bar" onkeypress="searchURL(event)">
+            </div>
+
+            <div class="dropdown">
+                <button class="btn bg-transparent" type="button" id="triggerId" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user text-white" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu" style="transform:translate3d(-100%, 38px, 0px)" aria-labelledby="triggerId">
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <span class="ml-1">Clear history</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                        <span class="ml-1">Setting</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn bg-transparent" type="button" id="triggerId" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v text-white" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu" style="transform:translate3d(-100%, 38px, 0px)" aria-labelledby="triggerId">
+                    <a class="dropdown-item" href="#">
+                        <span>New tab</span>
+                        <span class="shortcut-menu">CTRL + T</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <span>History</span>
+                        <span class="shortcut-menu">CTRL + H</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <span>Setting</span>
+                        <span class="shortcut-menu">CTRL + S</span>
+                    </a>
+
+                    <a class="dropdown-item" href="#">
+                        <span>Bookmarks</span>
+                        <span class="shortcut-menu">CTRL + B</span>
+                    </a>
+
+                    <a class="dropdown-item" href="#">
+                        <span>Theme</span>
+                        <span class="shortcut-menu">CTRL + K + T</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="bookmarks px-3">
+        <div class="dropdown">
+            <button class="btn bg-transparent p-0 mr-2" type="button" id="triggerId" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <div class="bookmarks-item hover">
+                    <i class="fa fa-folder bookmarks-icon" aria-hidden="true"></i>
+                    <span class="ml-1">electron</span>
+                </div>
+            </button>
+            <div class="dropdown-menu" style="transform:translate3d(-100%, 38px, 0px)" aria-labelledby="triggerId">
+                <a class="dropdown-item" href="#">
+                    <i class="fa fa-globe nav-link-icon" aria-hidden="true"></i>
+                    <span class="ml-2 text-truncate">Google</span>
+                </a>
+            </div>
+        </div>
+
+        <div id="sideloader"></div>
+
+
+        <a class="nav-link d-none tmpl-nav-link" href="#">
+            <div class="w-100 d-flex align-items-center" style="margin-right: 16px;">
+                <i class="fa fa-globe nav-link-icon" aria-hidden="true"></i>
+                <span class="ml-2 text-truncate">New Tab</span>
+                <i class="fa fa-times-circle ml-auto"  onclick="removeTab(event)" aria-hidden="true" id=""></i>
+            </div>
+            <div class="spread"></div>
+        </a>
+
+    </div>
+
+    <iframe src=""  id="web-content"></iframe>
+
+</body>
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/index.js"></script>
+
+</html>

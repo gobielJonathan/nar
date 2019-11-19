@@ -1,0 +1,58 @@
+body {
+    background-color: #202124;
+    font-size: 14px;
+    overflow-y: hidden;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    background-color: #323639 !important;
+    border: 1px solid white;
+}
+
+.dropdown-item {
+    color: white !important;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(192, 192, 192, .5) !important;
+}
+
+button:focus{
+    box-shadow: unset !important;
+}
+
+.shortcut-menu{
+    font-size: x-small;
+    margin-left: .25rem;
+}
+#web-content{
+    border: 0;
+    width: 100%;
+    height: calc(100vh - 122px);
+}
+.spread{
+    width: 1px;
+    background-color: #323639;
+    height: 100%;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+

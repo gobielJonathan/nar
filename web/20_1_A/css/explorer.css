@@ -1,0 +1,35 @@
+.explorer {
+    width: 250px;
+    background-color: #252526 !important;
+}
+
+.explorer-header {
+    background-color: #383838 !important;
+    color: #aeaeae;
+    padding: .25rem 1rem;
+}
+
+.explorer-header-content {
+    padding: .25rem 0;
+}
+
+.explorer-items {
+    color: #aeaeae;
+    padding: 6px 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.explorer-items .logo {
+    width: 16px;
+    height: 16px;
+}
+
+.explorer-items:hover {
+    cursor: pointer;
+    background-color: rgba(56, 56, 56, .4);
+}
+
+.explorer-items .logo {
+    color: #229ce6;
+}

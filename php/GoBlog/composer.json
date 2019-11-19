@@ -1,0 +1,12 @@
+{
+    "name" : "",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "GoBlog\\": "src"
+        }
+    },
+    "require": {
+        "cboden/ratchet": "^0.4.1",
+    }
+}

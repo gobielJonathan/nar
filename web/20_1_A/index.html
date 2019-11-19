@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./assets/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/aside.css">
+    <link rel="stylesheet" href="./css/explorer.css">
+    <link rel="stylesheet" href="./css/text-editor.css">
+    <title>PIcual Code</title>
+</head>
+
+<body>
+    <nav class="px-2">
+        <div class="logo">
+            <i class="fa fa-code" aria-hidden="true"></i>
+        </div>
+        <div class="nav-items">
+            <div class="dropdown">
+                <button class="btn bg-transparent p-0 nav-text" type="button" id="triggerId" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    File
+                </button>
+                
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" href="#">New File</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalOpenFile">Open File</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-items">
+            <div class="dropdown">
+                <button class="btn bg-transparent p-0 nav-text" type="button" id="triggerId" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Edit
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" href="#">Undo</a>
+                    <a class="dropdown-item" href="#">Redo</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Cut</a>
+                    <a class="dropdown-item" href="#">Copy</a>
+                    <a class="dropdown-item" href="#">Paste</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <aside>
+            <div class="aside-items active">
+                <div class="aside-items-logo">
+                    <i class="fa fa-files-o" aria-hidden="true"></i>
+                </div>
+                <span class="badge badge-pill badge-primary">1</span>
+            </div>
+            <div class="aside-items">
+                <div class="aside-items-logo">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <span class="badge badge-pill badge-primary">1</span>
+            </div>
+        </aside>
+
+        <section class="explorer">
+            <div class="explorer-header">20_1_1</div>
+            <div class="explorer-content">
+                <div class="explorer-items">
+                    <img src="./assets/js-logo.png" class="logo" alt="">
+                    <span class="ml-1">index.js</span>
+                </div>
+                <div class="explorer-items">
+                    <img src="./assets/html5.png" class="logo" alt="">
+                    <span class="ml-1">index.html</span>
+                </div>
+                <div class="explorer-items">
+                    <img src="./assets/css.png" class="logo" alt="">
+                    <span class="ml-1">index.css</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-editor">
+            <div class="editor-tab">
+                <div class="editor-tab-items">
+                    <span>index.html</span>
+                    <span>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="editor-tab-items active">
+                    <span>index.html</span>
+                    <span>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+
+
+            <section class="editor">
+               <div class="line-numbers">
+                    <div class="number">1</div>
+               </div>
+                <div class="code" contenteditable="true"></div>
+            </section>
+        </div>
+    </main>
+
+    
+    <!-- Open File Modal -->
+    <div class="modal fade" id="modalOpenFile" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Open File</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <img src="./assets/css.png" class="logo" alt="" style="width: 16px;height: 16px;">
+                            <span class="ml-1">index.css</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <img src="./assets/html5.png" class="logo" alt="" style="width: 16px;height: 16px;">
+                            <span class="ml-1">index.html</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Open</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+</body>
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/text-editor.js"></script>
+</html>
