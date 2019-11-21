@@ -1,22 +1,14 @@
 <?php
-namespace App\Config;
 
-class Config {
-    private static $instance = null;
+namespace Util;
 
-    private function __construct(){
-        
-    }
+class Config
+{
 
-    public static function getInstance(){
-        if (self::$instance == null) {
-            # code...
-            self::$instance = new Config;
-        }
-        return self::$instance;
-    }
-
-    public function all(){
-        return  fopen("../.env.json","r");
+    public static function all()
+    {
+        $root = dirname(dirname(dirname(__FILE__)));
+        $content = file_get_contents($root . "\.env.json", "r");
+        return json_decode($content, true);
     }
 }

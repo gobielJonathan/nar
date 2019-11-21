@@ -1,6 +1,18 @@
 <?php
+
 namespace Database\Migration;
 
-interface Migrater {
-    public function run();
+use Database\Connection;
+
+abstract class Migrater
+{
+    protected $database;
+
+    public function __construct()
+    {
+        $this->database = Connection::getInstance();
+    }
+
+    abstract public function run();
+
 }

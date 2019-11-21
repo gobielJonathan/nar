@@ -6,21 +6,21 @@ require_once '../../vendor/autoload.php';
 
 use Database\Connection;
 
-class Post extends Model
+class User extends Model
 {
     static $instance = null;
     private $database = null;
 
     private function __construct()
     {
-        $this->table= "posts";
+        $this->table= "users";
         $this->database = Connection::getInstance();
      }
 
     public static function getInstance()
     {
         if (self::$instance == null)
-            self::$instance = new Post();
+            self::$instance = new User;
         return self::$instance;
     }
 

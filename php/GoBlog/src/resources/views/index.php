@@ -46,6 +46,7 @@
             <div class="col-md-6 gedf-main">
                 <?php include  "./components/post-form.php"; ?>
                 <?php include  "./components/post.php"; ?>
+                <?php include  "./components/pagination.php"; ?>
             </div>
 
             <div class="col-md-3">

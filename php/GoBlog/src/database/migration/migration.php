@@ -1,18 +1,42 @@
-<?php 
+<?php
+
 namespace Database\Migration;
 
-class Migration implements Migrater {
+class Migration
+{
+
+    static $instance = null;
+
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
+            # code...
+            return self::$instance = new Migration;
+        }
+        return self::$instance;
+    }
+    private function __construct()
+    { }
 
     public function run()
     {
         $migrations = [
-            new TablePostMigration
+            new create_post_table,
+            new create_user_table
         ];
-        
-        foreach ($migrations as $migration) {
-            # code...
-            $migration->run();
-        }
-    }
+        $msg = [];
 
+        foreach ($migrations as $key => $val) {
+            # code...
+            $msg[$key] = $val->run();
+            if ($msg[$key] == TRUE) {
+                # code...
+                $msg[$key] = $val. " was successfully migrate";
+            }else {
+                $msg[$key] =  $val. " was failed migrate cause ". $msg[$key];
+             }
+        }
+        return $msg;
+    }
 }
+

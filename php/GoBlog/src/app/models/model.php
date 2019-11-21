@@ -1,10 +1,12 @@
 <?php
 namespace App\Models;
 
-interface Model {
-    public function add($model);
-    public function remove($model);
-    public function update($model);
-    public function gets();
-    public function get($id);
+abstract class Model {
+    public $table = "";
+    
+    abstract public function add($model);
+    abstract public function remove($model);
+    abstract public function update($model);
+    abstract public function gets();
+    abstract public function get($id);
 }
