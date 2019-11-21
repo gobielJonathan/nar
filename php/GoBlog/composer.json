@@ -3,10 +3,12 @@
     "description": "",
     "autoload": {
         "psr-4": {
-            "GoBlog\\": "src"
+           "App\\" : "src/app",
+           "Database\\" : "src/database"
         }
     },
     "require": {
         "cboden/ratchet": "^0.4.1",
+        "fzaninotto/faker": "^1.9"
     }
 }
