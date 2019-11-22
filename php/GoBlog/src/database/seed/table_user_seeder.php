@@ -12,7 +12,7 @@ class table_user_seeder implements Seed{
 
         $sql = sprintf("INSERT INTO %s(`fullname`,`username`,`password`,`picture_path`)VALUES", User::getInstance()->table);
         $vals = [];
-        for ($i=0; $i < 200; $i++) { 
+        for ($i=0; $i < 500; $i++) { 
             # code...
             $vals[] =  sprintf("(\"%s\",\"%s\",\"%s\",\"%s\")",$faker->name, $faker->name, base64_encode("password"), $faker->imageUrl(300,300));
         }

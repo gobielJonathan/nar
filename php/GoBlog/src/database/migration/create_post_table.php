@@ -12,7 +12,8 @@ class create_post_table extends Migrater
         $sql .= sprintf(
             "     CREATE TABLE %s (
                     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                    content VARCHAR(200),
+                    content TEXT,
+                    user_id INT NOT NULL,
                     title VARCHAR(100) NOT NULL,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     updated_at DATETIME,

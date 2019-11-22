@@ -9,11 +9,11 @@ class table_post_seeder implements Seed{
     public function seed(){
         $faker = Factory::create();
 
-        $sql = sprintf("INSERT INTO %s(`content`,`title`)VALUES", Post::getInstance()->table);
+        $sql = sprintf("INSERT INTO %s(`content`,`title`,`user_id`)VALUES", Post::getInstance()->table);
         $vals = [];
-        for ($i=0; $i < 200; $i++) { 
+        for ($i=0; $i < 1000; $i++) { 
             # code...
-            $vals[] =  sprintf("(\"%s\",\"%s\")",$faker->text, $faker->company);
+            $vals[] =  sprintf("(\"%s\",\"%s\", %d)",$faker->text, $faker->company, mt_rand(1,200));
         }
         return $sql . implode(",", $vals) . ";";
     }

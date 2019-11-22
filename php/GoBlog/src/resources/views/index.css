@@ -1,0 +1,8 @@
+@font-face {
+    src : url(../../../public/assets/Noto_Sans/NotoSans-Regular.ttf);
+    font-family: "noto-sans";
+}
+
+body{
+    font-family: "noto-sans";
+}

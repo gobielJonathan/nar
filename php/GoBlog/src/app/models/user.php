@@ -33,9 +33,32 @@ class User extends Model
     public function update($model)
     { }
 
-    public function gets()
+    public function gets($filter, $page)
     { 
+        $sql = sprintf("SELECT fullname, username, picture_path FROM users WHERE deleted_at IS NULL AND id = %d",$filter);
+
+        $res = $this->database->query($sql);
         
+        $data = [];
+        
+        if ($res->num_rows > 0) {
+            # code...
+            $data = $res->fetch_assoc();
+        }
+
+        $sql = sprintf("SELECT * FROM posts WHERE deleted_at IS NULL AND user_id = %d",$filter);
+
+        $res = $this->database->query($sql);
+        
+        if ($res->num_rows > 0) {
+            # code...
+            while ($row = $res->fetch_assoc()) {
+                # code...
+                $data["post"][] = $row;
+            }
+        }
+
+        return $data;
     }
 
     public function get($id)
