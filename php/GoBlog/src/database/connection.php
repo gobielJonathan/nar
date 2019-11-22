@@ -73,10 +73,20 @@ class Connection
     public function multiQuery($query)
     {
         $res = $this->conn->multi_query($query);
+
         if ($this->conn->errno) {
             # code...
             return $this->conn->error;
         }
+
         return $res;
+    }
+
+    public function getError(){
+        if ($this->conn->errno) {
+            # code...
+            return $this->conn->error;
+        }
+        return null;
     }
 }

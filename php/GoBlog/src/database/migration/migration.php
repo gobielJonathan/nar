@@ -2,10 +2,14 @@
 
 namespace Database\Migration;
 
+use Database\Connection;
+
 class Migration
 {
 
     static $instance = null;
+
+    private $database = null;
 
     public static function getInstance()
     {
@@ -16,7 +20,9 @@ class Migration
         return self::$instance;
     }
     private function __construct()
-    { }
+    {
+        $this->database = Connection::getInstance();
+     }
 
     public function run()
     {
@@ -24,19 +30,15 @@ class Migration
             new create_post_table,
             new create_user_table
         ];
-        $msg = [];
 
+        $queries = "";
+        
         foreach ($migrations as $key => $val) {
             # code...
-            $msg[$key] = $val->run();
-            if ($msg[$key] == TRUE) {
-                # code...
-                $msg[$key] = $val. " was successfully migrate";
-            }else {
-                $msg[$key] =  $val. " was failed migrate cause ". $msg[$key];
-             }
+            $queries .= $val->query();
         }
-        return $msg;
+        $this->database->multiQuery($queries);
+        return $this->database->getError();
     }
 }
 

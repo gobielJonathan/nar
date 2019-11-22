@@ -6,7 +6,7 @@ use App\Models\Post;
 
 class create_post_table extends Migrater
 {
-    public function run()
+    public function query()
     {
         $sql = sprintf("DROP TABLE IF EXISTS %s;", Post::getInstance()->table);
         $sql .= sprintf(
@@ -21,8 +21,7 @@ class create_post_table extends Migrater
             ",
             Post::getInstance()->table
         );
-
-        return $this->database->multiQuery($sql);
+        return $sql;
     }
 
     public function __toString()
