@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../../../public/css/bootstrap.min.css">
-<link rel="stylesheet" href="views/index.css">
+<link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="../../../public/assets/font_awesome/css/font-awesome.min.css">
 <title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <a href="#" class="navbar-brand">
         <h4>
             <img src="../../../public/assets/icon.svg" alt="">
-            <span>Go~Blog</span>
+            <span>Gorum</span>
         </h4>
     </a>
     <form class="form-inline">
@@ -29,7 +29,19 @@
         <div class="col-md-3 position-sticky" style="top:10px;align-self: flex-start;">
             <div class="card">
                 <div class="card-body">
-                    <div class="h5">@LeeCross</div>
+                    <div class="h5 d-flex align-items-center">
+                        <span>@LeeCross</span>
+
+                        <div class="dropdown ml-auto">
+                            <button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                <a class="dropdown-item" onclick="logout()">Logout</a>
+                                <a class="dropdown-item" href="profile">Profile</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="h7 text-muted">Fullname : Miracles Lee Cross</div>
                     <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
                         etc.
@@ -51,8 +63,9 @@
 
         <div class="col-md-6 gedf-main">
             <?php include  "./components/post-form.php"; ?>
-            <?php include  "./components/loading.php"; ?>
             <div class="posts"></div>
+            <?php include  "./components/loading.php"; ?>
+
             <!-- post content will be retrieve from ajax  -->
         </div>
 
@@ -81,7 +94,19 @@
     </div>
 </div>
 
+<?php include "components/chat.php"?>
+
 <script src="../../../public/js/jquery.js"></script>
 <script src="../../../public/js/popper.min.js"></script>
 <script src="../../../public/js/bootstrap.min.js"></script>
-<script src="views/js/post.js" type="module"></script>
+<script src="js/post.js" type="module"></script>
+
+<?php 
+    func
+?>
+<script>
+    function logout() {
+        // sessionStorage.clear()
+        // location.reload()
+    }
+</script>

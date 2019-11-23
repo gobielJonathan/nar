@@ -18,7 +18,6 @@ export default function PostTemplate(data) {
                             <i class="fa fa-ellipsis-h"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                            <div class="h6 dropdown-header">Configuration</div>
                             <a class="dropdown-item" href="#">Save</a>
                             <a class="dropdown-item" href="#">Hide</a>
                             <a class="dropdown-item" href="#">Report</a>
@@ -29,9 +28,14 @@ export default function PostTemplate(data) {
 
         </div>
         <div class="card-body">
-            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> ${
+            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>
+            ${
+                new Date(new Date().getTime() - new Date(data.created_at).getTime()).getDate() > 0 ? 
+                new Date(new Date().getTime() - new Date(data.created_at).getTime()).getDate() : ""
+            }days 
+             ${
                 new Date(new Date().getTime() - new Date(data.created_at).getTime()).getMinutes()
-        } minutes</div>
+            } minutes</div>
             <a class="card-link" href="#">
                 <h5 class="card-title">${data.title}</h5>
             </a>

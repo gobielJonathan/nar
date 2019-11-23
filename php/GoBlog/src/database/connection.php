@@ -24,6 +24,7 @@ class Connection
         return self::$instance;
     }
 
+    
     private function __construct()
     {
         $config = Config::all();
@@ -46,6 +47,10 @@ class Connection
             $this->conn->close();
             $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->database);
         }
+    }
+
+    public function getConnection(){
+        return $this->conn;
     }
 
     public function createDatabase()

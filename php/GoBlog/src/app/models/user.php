@@ -9,7 +9,7 @@ use Database\Connection;
 class User extends Model
 {
     static $instance = null;
-    private $database = null;
+    private $database = null; 
 
     private function __construct()
     {
@@ -25,7 +25,21 @@ class User extends Model
     }
 
     public function add($model)
-    { }
+    {
+        $sql = sprintf("SELECT * FROM users WHERE username = '%s'", $model['username']);
+        $res = $this->database->query($sql);
+
+        if($res->num_rows > 0)
+            return "username already exists";
+
+        $sql = sprintf("INSERT INTO users(`fullname`,`username`,`password`, `picture_path`) VALUES('%s','%s','%s','%s')", 
+            $model['username'],
+            $model['fullname'],
+            $model['password'],
+            "https://lorempixel.com/300/300/?66224"
+        );
+        return $this->database->query($sql);
+     }
 
     public function remove($model)
     { }

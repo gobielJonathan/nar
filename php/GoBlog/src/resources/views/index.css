@@ -4,5 +4,5 @@
 }
 
 body{
-    font-family: "noto-sans";
+    font-family: "noto-sans" !important;
 }

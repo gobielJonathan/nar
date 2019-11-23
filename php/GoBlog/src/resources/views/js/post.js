@@ -1,43 +1,40 @@
 import PostTemplate from "./template/post_template.js";
-import PaginateTemplate from "./template/paginate_template.js";
 
+let isFetching = true;
+let currentPage = 1
 
 fetch()
-function fetch(api) {
+
+function fetch() {
     let postsHTML = "";
 
-    $(".posts").empty()
+    isFetching = true
+
     $(".loader").show()
 
-    if (!api) {
-        const page = parseInt(location.hash[1]) || 1
-        api = "http://localhost:8000/src/api/post.php?page=" + page
-    }
+    const api = "http://localhost:8000/src/api/post.php?page="+ (currentPage );
 
     $.getJSON(api, function (res) {
         const posts = res.data.data
-        const paginate = res.data.paginate
+        currentPage =  res.data.paginate.pages.findIndex(p => p.current_page)
+        currentPage = res.data.paginate.pages[currentPage].page + 1
 
         posts.forEach(post => {
             postsHTML += PostTemplate(post);
         });
 
-
-        const paginateHTML = PaginateTemplate(paginate)
-
         $(".loader").hide()
         $(".posts").append(postsHTML);
 
-        $(".posts").append(paginateHTML);
-        $(".page-link").click(redirectTo)
-
+        isFetching = false;
     })
 
 }
-function redirectTo(e) {
-    e.preventDefault()
-    const url = $(e.target).attr("href")
-    const page = new URLSearchParams(new URL(url).search).get("page")
-    location.hash = page
-    fetch(url)
-}
+
+$(window).scroll(function () {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        // you're at the bottom of the page
+        if (!isFetching)
+            fetch()
+    }
+})
