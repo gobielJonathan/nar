@@ -29,6 +29,7 @@ class ComposerStaticInit4e70ace8e079eefa4dee4f48d8d3ff01
             'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\Mime\\' => 23,
             'Symfony\\Component\\HttpFoundation\\' => 33,
+            'Socket\\' => 7,
         ),
         'R' => 
         array (
@@ -92,6 +93,10 @@ class ComposerStaticInit4e70ace8e079eefa4dee4f48d8d3ff01
         'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+        'Socket\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/socket',
         ),
         'React\\Stream\\' => 
         array (

@@ -7,22 +7,21 @@ require_once '../../vendor/autoload.php';
 use Database\Connection;
 use Util\Pagination;
 
-class Post extends Model
+class Chat extends Model
 {
     static $instance = null;
     private $database = null;
 
     private function __construct()
     {
-        $this->table = "posts";
+        $this->table = "chats";
         $this->database = Connection::getInstance();
-        $sql = "SELECT COUNT(*) as total_data FROM posts";
     }
 
     public static function getInstance()
     {
         if (self::$instance == null)
-            self::$instance = new Post();
+            self::$instance = new Chat;
         return self::$instance;
     }
 
@@ -37,20 +36,8 @@ class Post extends Model
 
     public function gets($query, $page)
     {
-        $sql = sprintf("SELECT COUNT(*)as total_data FROM posts p JOIN users u ON u.id = p.user_id AND (
-                p.title LIKE '%%%s%%' OR
-                p.content LIKE '%%%s%%'
-            )  WHERE p.deleted_at IS NULL", $query, $query);
+        $sql = sprintf("SELECT c.* , u.username, u.picture_path FROM `chats` c JOIN `users` u ON u.id = c.user_id  WHERE c.deleted_at IS NULL ORDER BY created_at  LIMIT %d,%d", ($page - 1 )* Pagination::$PER_PAGE, Pagination::$PER_PAGE);
 
-        $res = $this->database->query($sql);
-        $this->total_data = $res->fetch_assoc()["total_data"];
-
-        $sql = sprintf("SELECT p.*, u.fullname, u.username, u.picture_path FROM posts p JOIN users u ON u.id = p.user_id AND (
-                p.title LIKE '%%%s%%' OR
-                p.content LIKE '%%%s%%'
-           )  WHERE p.deleted_at IS NULL ORDER BY created_at DESC LIMIT %d,%d", $query, $query, ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
-
-        
         $res = $this->database->query($sql);
         $data = [];
 

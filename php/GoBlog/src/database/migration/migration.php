@@ -28,13 +28,14 @@ class Migration
     {
         $migrations = [
             // new create_post_table,
-            // new create_user_table
-            new create_follow_table
+            // new create_user_table,
+            // new create_follow_table,
+            new create_chat_table
         ];
 
         $queries = "";
         
-        foreach ($migrations as $key => $val) {
+        foreach ($migrations as  $val) {
             # code...
             $queries .= $val->query();
         }

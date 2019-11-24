@@ -101,7 +101,7 @@
     </span>
 </div>
 
-<div class="chat-popup" >
+<div class="chat-popup show">
 
     <div class="chat-detail d-flex">
 

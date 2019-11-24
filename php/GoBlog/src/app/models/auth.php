@@ -39,12 +39,17 @@ class Auth
 
         $user = $res->fetch_assoc();
 
+        if($user['id'] == null){
+            return null;
+        }
+
         $sql = sprintf(
             "SELECT COUNT(followed_id) as follows FROM `follows` WHERE follower_id = %d
             union
             SELECT COUNT(follower_id)as follows FROM `follows` WHERE followed_id = %d",
             $user['id'],$user['id']
         );
+
         $res = $this->database->query($sql);
 
         $follower = $res->fetch_assoc()['follows'];
@@ -52,6 +57,7 @@ class Auth
 
         if ($res->num_rows == 0)
             return null;
+            
         return (object)array_merge(
             (array) $user,
             (array) [

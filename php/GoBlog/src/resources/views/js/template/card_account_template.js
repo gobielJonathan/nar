@@ -24,11 +24,11 @@ export default function CardAccount(data) {
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="h6 text-muted">Followers</div>
-                    <div class="h5">${data.follower}</div>
+                    <div class="h5">${data.follower || 0}</div>
                 </li>
                 <li class="list-group-item">
                     <div class="h6 text-muted">Following</div>
-                    <div class="h5">${data.following}</div>
+                    <div class="h5">${data.following || 0}</div>
                 </li>
             </ul>
         </div>
