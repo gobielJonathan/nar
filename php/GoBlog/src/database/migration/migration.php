@@ -27,8 +27,9 @@ class Migration
     public function run()
     {
         $migrations = [
-            new create_post_table,
-            new create_user_table
+            // new create_post_table,
+            // new create_user_table
+            new create_follow_table
         ];
 
         $queries = "";

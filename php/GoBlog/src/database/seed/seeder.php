@@ -27,8 +27,9 @@ class Seeder
     {
 
         $seeds = [
-            new table_post_seeder,
-            new table_user_seeder
+            // new table_post_seeder,
+            // new table_user_seeder
+            new table_follow_seeder
         ];
 
         $queries = "";

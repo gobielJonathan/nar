@@ -26,7 +26,7 @@ class Auth
 
     public function check($username, $password)
     {
-        $sql = "SELECT fullname, username,picture_path FROM users WHERE username = ? AND password = ?";
+        $sql = "SELECT id, fullname, username,picture_path, status FROM users WHERE username = ? AND password = ?";
         // prepare and bind
         $stmt = $this->database->getConnection()->prepare($sql);
 
@@ -37,13 +37,30 @@ class Auth
         $res = $stmt->get_result();
         $stmt->close();
 
+        $user = $res->fetch_assoc();
+
+        $sql = sprintf(
+            "SELECT COUNT(followed_id) as follows FROM `follows` WHERE follower_id = %d
+            union
+            SELECT COUNT(follower_id)as follows FROM `follows` WHERE followed_id = %d",
+            $user['id'],$user['id']
+        );
+        $res = $this->database->query($sql);
+
+        $follower = $res->fetch_assoc()['follows'];
+        $following = $res->fetch_assoc()['follows'];
+
         if ($res->num_rows == 0)
             return null;
-        return $res->fetch_assoc();
+        return (object)array_merge(
+            (array) $user,
+            (array) [
+                "follower" => $follower, 
+                "following" => $following
+            ]
+        );
     }
 
     public function forgetPassword($email)
-    {
-       
-    }
+    { }
 }

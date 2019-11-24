@@ -5,19 +5,24 @@ let currentPage = 1
 
 fetch()
 
-function fetch() {
+export function fetch(query) {
     let postsHTML = "";
 
     isFetching = true
 
     $(".loader").show()
 
-    const api = "http://localhost:8000/src/api/post.php?page="+ (currentPage );
+    const api = `http://localhost:8000/src/api/post.php?page=${currentPage}&q=${query || ""}`;
 
     $.getJSON(api, function (res) {
         const posts = res.data.data
-        currentPage =  res.data.paginate.pages.findIndex(p => p.current_page)
-        currentPage = res.data.paginate.pages[currentPage].page + 1
+        const paginate = res.data.paginate
+
+        if (paginate.length != 0) {
+            currentPage = paginate.pages.findIndex(p => p.current_page)
+
+            currentPage = paginate.pages[currentPage].page + 1
+        }
 
         posts.forEach(post => {
             postsHTML += PostTemplate(post);
@@ -29,6 +34,9 @@ function fetch() {
         isFetching = false;
     })
 
+}
+export function clearPost(){
+    $(".posts").empty()
 }
 
 $(window).scroll(function () {

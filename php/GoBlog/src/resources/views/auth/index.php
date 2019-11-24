@@ -23,6 +23,14 @@
 
 <body>
 
+	<script>
+
+		if (sessionStorage.getItem("auth") != null) {
+			location.href="index.php"
+		}
+
+	</script>
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">

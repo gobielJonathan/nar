@@ -15,6 +15,7 @@ class create_user_table extends Migrater
                     fullname VARCHAR(200),
                     username VARCHAR(100) NOT NULL,
                     password VARCHAR(100) NOT NULL,
+                    status VARCHAR(200) DEFAULT 'Hello, I want to share my knowledge to you'
                     picture_path VARCHAR(200) NOT NULL,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     updated_at DATETIME,

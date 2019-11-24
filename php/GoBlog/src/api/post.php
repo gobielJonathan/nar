@@ -9,9 +9,9 @@ use Util\Pagination;
 $post = Post::getInstance();
 $page = $_GET['page'] ?? 1;
 
-$title = $_GET['title'] ?? "";
+$query = $_GET['q'] ?? "";
 
-$data = $post->gets($title, $page);
+$data = $post->gets($query, $page);
 
 $params = Filter::getParams($_GET);
 

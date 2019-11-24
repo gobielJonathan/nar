@@ -35,7 +35,7 @@
                         })
                     } else {
                         location.href = "index.php";
-                        sessionStorage.setItem("auth", user)
+                        sessionStorage.setItem("auth", JSON.stringify(user))
                     }
                 },
                 fail: function (data) {

@@ -35,13 +35,20 @@ class Post extends Model
     public function update($model)
     { }
 
-    public function gets($filter, $page)
+    public function gets($query, $page)
     {
-        $sql = sprintf("SELECT COUNT(*)as total_data FROM posts p JOIN users u ON u.id = p.user_id AND p.title LIKE '%%%s%%'  WHERE p.deleted_at IS NULL", $filter);
+        $sql = sprintf("SELECT COUNT(*)as total_data FROM posts p JOIN users u ON u.id = p.user_id AND (
+                p.title LIKE '%%%s%%' OR
+                p.content LIKE '%%%s%%'
+            )  WHERE p.deleted_at IS NULL", $query, $query);
+
         $res = $this->database->query($sql);
         $this->total_data = $res->fetch_assoc()["total_data"];
 
-        $sql = sprintf("SELECT p.*, u.fullname, u.username, u.picture_path FROM posts p JOIN users u ON u.id = p.user_id AND p.title LIKE '%%%s%%'  WHERE p.deleted_at IS NULL ORDER BY created_at DESC LIMIT %d,%d", $filter, $page, Pagination::$PER_PAGE);
+        $sql = sprintf("SELECT p.*, u.fullname, u.username, u.picture_path FROM posts p JOIN users u ON u.id = p.user_id AND (
+                p.title LIKE '%%%s%%' OR
+                p.content LIKE '%%%s%%'
+           )  WHERE p.deleted_at IS NULL ORDER BY created_at DESC LIMIT %d,%d", $query, $query, $page, Pagination::$PER_PAGE);
 
         
         $res = $this->database->query($sql);
