@@ -4,7 +4,7 @@ namespace Socket\Handler;
 
 use App\Models\Chat;
 
-require_once dirname(__DIR__). "/../../vendor/autoload.php";
+require_once dirname(__DIR__) . "/../../vendor/autoload.php";
 
 class ChatHandler
 {
@@ -12,7 +12,7 @@ class ChatHandler
 	{
 		$messageLength = strlen($message);
 		foreach ($clientSocketArray as $clientSocket) {
-			socket_write($clientSocket, $message, $messageLength);
+			@socket_write($clientSocket, $message, $messageLength);
 		}
 		return true;
 	}
@@ -68,7 +68,7 @@ class ChatHandler
 			"Upgrade: websocket\r\n" .
 			"Connection: Upgrade\r\n" .
 			"WebSocket-Origin: $host_name\r\n" .
-			"WebSocket-Location: ws://$host_name:$port/demo/shout.php\r\n" .
+			"WebSocket-Location: ws://$host_name:$port/src/socket/chatsocket.php\r\n" .
 			"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 		socket_write($client_socket_resource, $buffer, strlen($buffer));
 	}
@@ -79,7 +79,7 @@ class ChatHandler
 
 		$chat = Chat::getInstance();
 
-		$messageArray = array('message' => $message,"chats" => $chat->gets("",1));
+		$messageArray = array('message' => $message, "chats" => $chat->gets("", 1));
 
 		$ACK = $this->seal(json_encode($messageArray));
 		return $ACK;
@@ -93,16 +93,14 @@ class ChatHandler
 		return $ACK;
 	}
 
-	function saveMessage($chat_user, $chat_message)
+	function saveMessage($chat)
 	{
-		$chat = Chat::getInstance();
+		Chat::getInstance()->add([
+			"user_id" => $chat['id'],
+			"message" => $chat['content']
+		]);
+		$chat['created_at'] = getdate();
 
-		$chatMessage = $this->seal(json_encode([
-			$chat->add([
-				"user_id" => $chat_user,
-				"message" => $chat_message 
-			])
-		]));
-		return $chatMessage;
+		return $this->seal(json_encode($chat));
 	}
 }

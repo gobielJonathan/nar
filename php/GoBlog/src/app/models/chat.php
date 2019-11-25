@@ -45,7 +45,7 @@ class Chat extends Model
 
         echo $last_id."\n\n\n\n";
 
-        return $this->get($last_id);
+        return "ea";
     }
 
     public function remove($model)

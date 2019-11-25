@@ -1,7 +1,5 @@
 import ChatListPersonalTemplate from "../js/template/chat-list-personal.js";
 
-
-
 let conn = new WebSocket('ws://localhost:8090');
 
 conn.onopen = function(e) {
@@ -10,12 +8,14 @@ conn.onopen = function(e) {
 
 conn.onmessage = function(e) {
     const data = JSON.parse(e.data)
-    console.log(data);
     let chatsHTML = "";
 
-    data.chats.forEach(chat => {
-        chatsHTML += ChatListPersonalTemplate(chat)    
-    });
+    if(data.chats instanceof Array)
+        data.chats.forEach(chat => {
+            chatsHTML += ChatListPersonalTemplate(chat)    
+        });
+    else 
+        chatsHTML = ChatListPersonalTemplate(data)
     $(".chat-personal-list").append(chatsHTML)
 };
 
@@ -32,8 +32,8 @@ $("#input-chat").keypress(function (e) {
         }
 
         const msg = {
-            chat_user : auth.id,
-            chat_message : $(this).val()
+           ...auth, 
+           content : $(this).val()
         }
         conn.send(JSON.stringify(msg))
     }

@@ -5,7 +5,6 @@ namespace Socket;
 require_once dirname(__DIR__) . "/../vendor/autoload.php";
 
 use Socket\Handler\ChatHandler;
-
 new ChatSocket;
 
 class ChatSocket
@@ -49,9 +48,6 @@ class ChatSocket
                 $newSocket = socket_accept($this->socketResource);
                 $this->clientSocketArray[] = $newSocket;
                 
-                var_dump($newSocket);
-
-
                 $header = socket_read($newSocket, 1024);
                 $this->chatHandler->doHandshake($header, $newSocket, SELF::HOST_NAME, SELF::PORT);
 
@@ -72,10 +68,11 @@ class ChatSocket
                 while (socket_recv($newSocketArrayResource, $socketData, 1024, 0) >= 1) {
                     $socketMessage = $this->chatHandler->unseal($socketData);
 
-                    $messageObj = json_decode($socketMessage);
+                    $messageObj = json_decode($socketMessage, true);
+
 
                     $this->chatHandler->send($this->clientSocketArray, 
-                        $this->chatHandler->saveMessage($messageObj->chat_user, $messageObj->chat_message)
+                        $this->chatHandler->saveMessage($messageObj)
                     );
                     break 2;
                 }
@@ -99,3 +96,4 @@ class ChatSocket
     public function onError()
     { }
 }
+
