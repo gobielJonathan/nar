@@ -80,8 +80,9 @@
         box-shadow: 0 -2px 8px 1px rgba(0, 0, 0, 0.1);
         border-bottom-right-radius: 20px;
     }
+
     .chat-popup .chat-detail .chat-textbox .input-group .form-control {
-        border-bottom-left-radius : 20px;
+        border-bottom-left-radius: 20px;
     }
 
     @media screen and (max-width: 568px) {
@@ -90,6 +91,58 @@
         .chat-popup {
             display: none;
         }
+    }
+
+    .chat-personal-list {
+        height: calc(100% - 114px);
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .chat-personal-list {
+        height: calc(100% - 114px);
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .chat-bubble {
+        border-radius: 0 12px 12px 12px;
+
+        padding: 0.7rem;
+        max-width: 85%;
+        background-color: #007bff;
+        color: white;
+    }
+
+    .chat-avatar {
+        margin-right: .25rem;
+        margin-bottom: .5rem;
+        align-self: flex-start;
+    }
+
+    .chat-avatar img {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
+
+    .list-chat-detail.other>div>.chat-bubble {
+        border-radius: 12px 0 12px 12px;
+
+        margin-right: unset;
+        margin-left: auto;
+        background-color: #f1f1f1;
+        color: rgba(0, 0, 0, .7);
+    }
+
+
+    .list-chat-detail.other>.chat-avatar {
+        margin-left: auto;
+    }
+
+    .list-chat-detail.other>div>.chat-time {
+        margin-left: auto;
     }
 </style>
 
@@ -120,12 +173,14 @@
                 </div>
             </div>
 
+            <div class="chat-personal-list px-3 py-2">
 
-            <?php include "chat-list-personal/index.php" ?>
+            </div>
+
 
             <div class="chat-textbox">
                 <div class="input-group h-100">
-                    <input type="text" name="name" id="name" class="form-control border-0 h-100" placeholder="Let's talk..." aria-describedby="sufixId">
+                    <input type="text" name="" id="input-chat" class="form-control border-0 h-100" placeholder="Let's talk..." aria-describedby="sufixId">
                     <span class="input-group-addon color-primary px-3 d-flex justify-content-center align-items-center hover" id="sufixId">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i>
                     </span>
@@ -135,9 +190,10 @@
     </div>
 </div>
 
-
 <script>
     function onToggleChatPopup() {
         $(".chat-popup").toggleClass("show")
     }
 </script>
+
+<script src="./js/chat.js" type="module"></script>

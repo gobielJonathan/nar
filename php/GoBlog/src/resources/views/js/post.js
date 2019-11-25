@@ -35,6 +35,7 @@ export function fetch(query) {
     })
 
 }
+
 export function clearPost(){
     $(".posts").empty()
 }

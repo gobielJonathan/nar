@@ -48,6 +48,8 @@
 <script src="../../../public/js/jquery.js"></script>
 <script src="../../../public/js/popper.min.js"></script>
 <script src="../../../public/js/bootstrap.min.js"></script>
+<script src="../../../public/js/sweetalert.min.js"></script>
+
 <script src="js/post.js" type="module"></script>
 <script src="js/auth.js" type="module"></script>
 <script src="js/filter-post.js" type="module"></script>
