@@ -19,6 +19,7 @@ class Pagination
             $condition_limit_num = ($page + $range)  + 1;
             $paging_arr['pages'] = array();
             $page_count = 0;
+            
             for ($x = $initial_num; $x < $condition_limit_num; $x++) {
                 if (($x > 0) && ($x <= $total_pages)) {
                     $paging_arr['pages'][$page_count]["page"] = $x;

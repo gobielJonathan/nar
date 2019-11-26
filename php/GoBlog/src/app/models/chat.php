@@ -56,7 +56,7 @@ class Chat extends Model
 
     public function gets($query, $page)
     {
-        $sql = sprintf("SELECT c.* , u.username, u.picture_path FROM `chats` c JOIN `users` u ON u.id = c.user_id  WHERE c.deleted_at IS NULL ORDER BY created_at  LIMIT %d,%d", ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
+        $sql = sprintf("SELECT c.* , u.username, u.picture_path FROM `chats` c JOIN `users` u ON u.id = c.user_id  WHERE c.deleted_at IS NULL ORDER BY created_at DESC  LIMIT %d,%d", ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
 
         $res = $this->database->query($sql);
         $data = [];

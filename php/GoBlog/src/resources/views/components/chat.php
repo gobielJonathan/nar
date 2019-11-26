@@ -25,7 +25,7 @@
         opacity: 0;
         transform: rotateX(-90deg);
         width: 600px;
-        height: 350px;
+        height: 450px;
         box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
         background-color: white;
         z-index: 5;
@@ -106,10 +106,10 @@
     }
 
     .chat-bubble {
+        max-width: 300px;
+        word-wrap: break-word;
         border-radius: 0 12px 12px 12px;
-
         padding: 0.7rem;
-        max-width: 85%;
         background-color: #007bff;
         color: white;
     }
@@ -127,15 +127,21 @@
         border-radius: 50%;
     }
 
-    .list-chat-detail.other>div>.chat-bubble {
-        border-radius: 12px 0 12px 12px;
-
-        margin-right: unset;
-        margin-left: auto;
-        background-color: #f1f1f1;
-        color: rgba(0, 0, 0, .7);
+    .list-chat-detail> .chat-bubble-wrapper{
+        margin-right:auto;
     }
 
+    .list-chat-detail.other>div>.chat-bubble {
+        border-radius: 12px 0 12px 12px;
+        background-color: #f1f1f1;
+        color: rgba(0, 0, 0, .7);
+        margin-left : auto;
+    }
+
+    .list-chat-detail.other> .chat-bubble-wrapper{
+        margin-right: unset;
+        margin-left: auto;
+    }
 
     .list-chat-detail.other>.chat-avatar {
         margin-left: auto;
@@ -150,11 +156,10 @@
     <i class="fa fa-comment" aria-hidden="true"></i>
     <span class="ml-2">
         Chat
-        <span class="badge badge-warning" id="chat-count">4</span>
     </span>
 </div>
 
-<div class="chat-popup show">
+<div class="chat-popup">
 
     <div class="chat-detail d-flex">
 
@@ -175,7 +180,7 @@
 
             <div class="chat-personal-list px-3 py-2">
 
-            </div>
+            </div> 
 
 
             <div class="chat-textbox">

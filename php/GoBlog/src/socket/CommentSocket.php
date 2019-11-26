@@ -2,12 +2,13 @@
 
 namespace Socket;
 
+use Socket\Handler\CommentHandler;
+
 require_once dirname(__DIR__) . "/../vendor/autoload.php";
 
-use Socket\Handler\ChatHandler;
-new ChatSocket;
+new CommentSocket;
 
-class ChatSocket
+class CommentSocket
 {
 
     const HOST_NAME = "localhost";
@@ -18,7 +19,7 @@ class ChatSocket
 
     public function __construct()
     {
-        $this->chatHandler = new ChatHandler;
+        $this->chatHandler = new CommentHandler;
         $this->onOpen();
         $this->onMessage();
     }

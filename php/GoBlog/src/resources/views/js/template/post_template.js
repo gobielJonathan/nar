@@ -47,8 +47,6 @@ export default function PostTemplate(data) {
         </div>
         <div class="card-footer">
             <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
         </div>
     </div>
     `

@@ -7,21 +7,21 @@ require_once dirname(__DIR__).'/../../vendor/autoload.php';
 use Database\Connection;
 use Util\Pagination;
 
-class Post extends Model
+class Comment extends Model
 {
     static $instance = null;
     private $database = null;
 
     private function __construct()
     {
-        $this->table = "posts";
+        $this->table = "comments";
         $this->database = Connection::getInstance();
     }
 
     public static function getInstance()
     {
         if (self::$instance == null)
-            self::$instance = new Post();
+            self::$instance = new Comment;
         return self::$instance;
     }
 
