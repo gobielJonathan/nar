@@ -13,8 +13,9 @@ class create_comment_table extends Migrater
         $sql .= sprintf(
             "     CREATE TABLE %s (
                     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                    post_id INT, 
                     user_id INT NOT NULL, 
-                    parent_id INT NOT NULL, 
+                    parent_id INT, 
                     content TEXT, 
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     updated_at DATETIME,

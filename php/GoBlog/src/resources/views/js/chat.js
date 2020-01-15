@@ -1,4 +1,4 @@
-// import ChatListPersonalTemplate from "../js/template/chat-list-personal.js";
+// import ChatListPersonalTemplate from "../js/template/chat_list_personal.js";
 
 // let conn = new WebSocket('ws://localhost:8090');
 

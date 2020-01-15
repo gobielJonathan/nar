@@ -10,8 +10,6 @@ $(document).ready(function () {
         $("#auth-nav").hide()
     }
 
-
-
     $("#logout").click(function () {
         sessionStorage.clear()
         location.reload()

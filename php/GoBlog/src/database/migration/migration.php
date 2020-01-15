@@ -30,7 +30,8 @@ class Migration
             // new create_post_table,
             // new create_user_table,
             // new create_follow_table,
-            new create_chat_table
+            // new create_chat_table,
+            new create_comment_table
         ];
 
         $queries = "";

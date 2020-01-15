@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-require_once dirname(__DIR__).'/../../vendor/autoload.php';
+require_once dirname(__DIR__) . '/../../vendor/autoload.php';
 
 use Database\Connection;
 use Util\Pagination;
@@ -31,7 +31,7 @@ class Comment extends Model
 
         $stmt = $this->database->getConnection()->prepare($sql);
 
-        $stmt->bind_param("sds", $model['content'] , $model['user_id'], $model['title']);
+        $stmt->bind_param("sds", $model['content'], $model['user_id'], $model['title']);
 
         $stmt->execute();
 
@@ -39,7 +39,7 @@ class Comment extends Model
         $stmt->close();
 
         return $res;
-     }
+    }
 
     public function remove($model)
     { }
@@ -49,31 +49,45 @@ class Comment extends Model
 
     public function gets($query, $page)
     {
-        $sql = sprintf("SELECT COUNT(*)as total_data FROM posts p JOIN users u ON u.id = p.user_id AND (
-                p.title LIKE '%%%s%%' OR
-                p.content LIKE '%%%s%%'
-            )  WHERE p.deleted_at IS NULL", $query, $query);
+        $sql = sprintf("SELECT COUNT(c.id) as total_data FROM `comments` c JOIN `users` u ON u.id = c.user_id  WHERE c.deleted_at IS NULL AND c.post_id = %d", $query);
 
         $res = $this->database->query($sql);
         $this->total_data = $res->fetch_assoc()["total_data"];
 
-        $sql = sprintf("SELECT p.*, u.fullname, u.username, u.picture_path FROM posts p JOIN users u ON u.id = p.user_id AND (
-                p.title LIKE '%%%s%%' OR
-                p.content LIKE '%%%s%%'
-           )  WHERE p.deleted_at IS NULL ORDER BY created_at DESC LIMIT %d,%d", $query, $query, ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
+        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.post_id = %d ORDER BY created_at DESC LIMIT %d,%d",$query,  ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
 
-        
+
         $res = $this->database->query($sql);
-        $data = [];
+
+        $children = [];
 
         if ($res->num_rows > 0) {
             # code...
             while ($row = $res->fetch_assoc()) {
                 # code...
-                $data[] = $row;
+                $children[$row['id']]['data'] = $row;          
+                $this->getCommentChild($row['id'], $children[$row['id']]);
             }
         }
-        return $data;
+
+        return $children;
+    }
+
+    public function getCommentChild($id, &$arr)
+    {
+        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.parent_id = %d", $id);
+
+        $res = $this->database->query($sql);
+
+        if ($res->num_rows > 0) {
+            # code...
+            while ($row = $res->fetch_assoc()) {
+                # code...
+                $arr[$row['id']]['data'] = $row;
+
+                $this->getCommentChild($row['id'], $arr[$row['id']]);
+            }
+        } else return;
     }
 
     public function get($id)
