@@ -1,4 +1,4 @@
-| subject | day |
-|---------|-----|
-| WD      | -   |
-| PHP     | -   |
+| subject | material           |
+|---------|--------------------|
+| WD      | Visual Studio Code |
+| PHP     | Realtime forum     |
