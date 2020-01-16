@@ -21,7 +21,7 @@ class Comment extends Model
     public static function getInstance()
     {
         if (self::$instance == null)
-            self::$instance = new Comment;
+            self::$instance = new Comment; 
         return self::$instance;
     }
 
@@ -54,7 +54,7 @@ class Comment extends Model
         $res = $this->database->query($sql);
         $this->total_data = $res->fetch_assoc()["total_data"];
 
-        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.post_id = %d ORDER BY created_at DESC LIMIT %d,%d",$query,  ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
+        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.parent_id IS NULL AND c.post_id = %d ORDER BY created_at DESC LIMIT %d,%d",$query,  ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
 
 
         $res = $this->database->query($sql);
@@ -71,7 +71,7 @@ class Comment extends Model
         }
 
         return $children;
-    }
+    } 
 
     public function getCommentChild($id, &$arr)
     {
@@ -83,11 +83,13 @@ class Comment extends Model
             # code...
             while ($row = $res->fetch_assoc()) {
                 # code...
-                $arr[$row['id']]['data'] = $row;
+                $arr['child'][$row['id']] = $row;          
 
-                $this->getCommentChild($row['id'], $arr[$row['id']]);
+                $this->getCommentChild($row['id'], $arr['child'][$row['id']]);
             }
-        } else return;
+        } else {
+            $arr['child'] = (object)[];
+        };
     }
 
     public function get($id)

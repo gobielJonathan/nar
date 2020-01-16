@@ -3,10 +3,10 @@ import PostTemplate from "./template/post_template.js";
 let isFetching = true;
 let currentPage = 1
 
-fetch()
+fetch() 
 
 export function fetch(query) {
-    let postsHTML = "";
+    let postsHTML = ""; 
 
     isFetching = true
 

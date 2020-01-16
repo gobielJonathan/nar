@@ -24,20 +24,24 @@ function createCommentHTML(comments) {
         const commentData = comments[key].data
         const html = CommentTemplate(commentData)
         $("#comments").append(html)
-        createChildCommentHTML(comments[key])
+        createChildCommentHTML(comments[key], key)
     }
 }
 
-function createChildCommentHTML(comment) {
-    for (const key in comment) {
+function createChildCommentHTML(comment, parentKey) {
+    for (const key in comment.child) {
     
-        if (key != "data") {
-            const key = comment[key].data.id
-            const commentData = comment[key].data 
-            const html = CommentTemplate(commentData)
-            $(`#post${key}`).append(html)
-            
-            createChildCommentHTML(comment[key])
-        }
+        const commentData = comment.child[key]
+        const html = CommentTemplate(commentData)
+       
+        $(`#post${parentKey}`).append("<div class=comment-container></div>")
+        $(`#post${parentKey} > .comment-container`).append(html)    
+
+        console.log(comment.child[key]);
+
+        createChildCommentHTML(comment.child[key], key)
+
+        console.log('---------------------');
+        console.log(comment.child[key]);
     }
 }

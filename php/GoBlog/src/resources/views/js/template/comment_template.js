@@ -2,7 +2,7 @@
 export default function CommentTempate(data) {
 
     return `
-        <div class="comment-container ml-4" id="post${data.id}">
+        <div class="comment-container" id="post${data.id}">
             <div class="comments p-2 d-flex">
 
                 <div class="comment-avatar mr-2 align-self-center">
@@ -30,8 +30,8 @@ export default function CommentTempate(data) {
                         <form action="" class="my-2 collapse" id="form${data.id}">
 
                             <div class="form-group">
-                                <label for="input-comment" class="font-weight-bold">Your Comment</label>
-                                <input type="text" name="" id="input-comment" class="form-control" placeholder="" aria-describedby="helpId">
+                                <label for="input-comment-${data.id}" class="font-weight-bold">Your Comment</label>
+                                <input type="text" name="" id="input-comment-${data.id}" class="form-control" placeholder="" aria-describedby="helpId">
                             </div>
         
                             <button type="submit" class="btn btn-primary">Send</button>

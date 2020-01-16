@@ -59,10 +59,12 @@
 //     }
 //     else {
 //         $("#empty").removeClass('d-flex').addClass('d-none')
-//         if (data.username !== JSON.parse(
-//             sessionStorage.getItem("auth")
-//         ).username) {
-//              Snackbar.show({text: `${data.username} sent a message`,pos: 'top-center'})
+//         if(sessionStorage.getItem('auth')){
+//             if (data.username !== JSON.parse(
+//                 sessionStorage.getItem("auth")
+//             ).username) {
+//                  Snackbar.show({text: `${data.username} sent a message`,pos: 'top-center'})
+//             }
 //         }
 //         chatsHTML = ChatListPersonalTemplate(data);
 //     }

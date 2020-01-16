@@ -9,7 +9,6 @@ new ChatSocket;
 
 class ChatSocket
 {
-
     const HOST_NAME = "localhost";
     const PORT = "8090";
     private $chatHandler;
@@ -73,7 +72,7 @@ class ChatSocket
 
                     if ($messageObj) {
                         # code...
-                        $data = $this->chatHandler->saveMessage($messageObj);
+                        $data = $this->chatHandler->saveDataToDatabase($messageObj);
 
                         foreach ($this->clientSocketArray as $socket) {
                             # code...
@@ -101,6 +100,8 @@ class ChatSocket
         socket_close($this->socketResource);
     }
     public function onError()
-    { }
+    {
+        socket_last_error($this->socketResource);
+     }
 }
 

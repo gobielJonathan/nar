@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-white">
 
-    <a href="#" class="navbar-brand" s>
+    <a href="/src/resources/views/" class="navbar-brand">
         <h4 class="d-flex align-items-center">
             <img src="../../../public/assets/icon.svg" alt="">
             <span class="ml-2">Gorum</span>
