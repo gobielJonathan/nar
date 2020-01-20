@@ -26,28 +26,11 @@
                     aria-haspopup="true" aria-expanded="false">
                     File
                 </button>
-                
-                <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="#">New File</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalOpenFile">Open File</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="nav-items">
-            <div class="dropdown">
-                <button class="btn bg-transparent p-0 nav-text" type="button" id="triggerId" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Edit
-                </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="#">Undo</a>
-                    <a class="dropdown-item" href="#">Redo</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Cut</a>
-                    <a class="dropdown-item" href="#">Copy</a>
-                    <a class="dropdown-item" href="#">Paste</a>
+                    <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#modalCreateFile">New File</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalOpenFile">Open File</a>
+                    <a class="dropdown-item" href="#" id="save-current-file-local">Download File</a>
                 </div>
             </div>
         </div>
@@ -62,85 +45,98 @@
                 </div>
                 <span class="badge badge-pill badge-primary">1</span>
             </div>
-            <div class="aside-items">
-                <div class="aside-items-logo">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                </div>
-                <span class="badge badge-pill badge-primary">1</span>
-            </div>
         </aside>
 
         <section class="explorer">
-            <div class="explorer-header">20_1_1</div>
+            <div class="explorer-header">Welcome</div>
             <div class="explorer-content">
-                <div class="explorer-items">
-                    <img src="./assets/js-logo.png" class="logo" alt="">
-                    <span class="ml-1">index.js</span>
-                </div>
-                <div class="explorer-items">
+                <!-- <div class="explorer-items active">
                     <img src="./assets/html5.png" class="logo" alt="">
                     <span class="ml-1">index.html</span>
-                </div>
-                <div class="explorer-items">
-                    <img src="./assets/css.png" class="logo" alt="">
-                    <span class="ml-1">index.css</span>
-                </div>
+                </div> -->
             </div>
         </section>
 
         <div class="text-editor">
             <div class="editor-tab">
-                <div class="editor-tab-items">
-                    <span>index.html</span>
-                    <span>
+                <section class="editor-tab-container">
+                    <!-- <div class="editor-tab-items active">
+                        <span>index.html</span>
                         <i class="fa fa-times" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div class="editor-tab-items active">
-                    <span>index.html</span>
-                    <span>
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </span>
-                </div>
+                    </div> -->
+                </section>
+
+                <button class="btn bg-transparent editor-tab-add">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+
             </div>
 
-
-            <section class="editor">
-               <div class="line-numbers">
-                    <div class="number">1</div>
-               </div>
-                <div class="code" contenteditable="true"></div>
+            <section class="editor row mx-0">
+                <div class="code col-6" contenteditable="true"></div>
+                <button class="btn bg-transparent btn-fulllscreen">
+                    <i class="fa fa-expand" aria-hidden="true"></i>
+                </button>
+                <div class="html-preview col-6 bg-white">
+                </div>
             </section>
         </div>
     </main>
 
-    
+
     <!-- Open File Modal -->
-    <div class="modal fade" id="modalOpenFile" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal fade" id="modalOpenFile" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Open File</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <img src="./assets/css.png" class="logo" alt="" style="width: 16px;height: 16px;">
-                            <span class="ml-1">index.css</span>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
+                    <div class="list-group" id="list-group-open-file">
+                        <!-- <a href="#" class="list-group-item list-group-item-action">
                             <img src="./assets/html5.png" class="logo" alt="" style="width: 16px;height: 16px;">
                             <span class="ml-1">index.html</span>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Open</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+
+    <!-- Create File Modal -->
+    <div class="modal fade" id="modalCreateFile" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Save File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form-save-file">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Filename</label>
+                            <input type="text" class="form-control" name="" id="filename_txt" aria-describedby="helpId"
+                                placeholder="">
+                            <p class="form-text text-muted"> without .html extesion </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -150,4 +146,5 @@
 <script src="./js/popper.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/text-editor.js"></script>
+
 </html>
