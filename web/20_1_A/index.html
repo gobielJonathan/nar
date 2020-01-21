@@ -28,7 +28,7 @@
                 </button>
 
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#modalCreateFile">New File</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalCreateFile">New File</a>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalOpenFile">Open File</a>
                     <a class="dropdown-item" href="#" id="save-current-file-local">Download File</a>
                 </div>
@@ -95,17 +95,25 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="list-group" id="list-group-open-file">
-                        <!-- <a href="#" class="list-group-item list-group-item-action">
-                            <img src="./assets/html5.png" class="logo" alt="" style="width: 16px;height: 16px;">
-                            <span class="ml-1">index.html</span>
-                        </a> -->
+               <form id="openFileForm">
+                    <div class="modal-body">
+                        <div class="list-group" id="list-group-open-file">
+                            <!-- <a href="#" class="list-group-item list-group-item-action">
+                                <img src="./assets/html5.png" class="logo" alt="" style="width: 16px;height: 16px;">
+                                <span class="ml-1">index.html</span>
+                            </a> -->
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <input type="file" class="form-control-file" accept="text/html" name="" multiple id="uploadFile" placeholder=""
+                                aria-describedby="fileHelpId">
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Open</button>
+                    </div>
+               </form>
             </div>
         </div>
     </div>

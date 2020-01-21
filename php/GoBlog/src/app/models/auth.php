@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-require_once dirname(__DIR__).'/../../vendor/autoload.php';
+
+require_once dirname(__DIR__) . '/../../vendor/autoload.php';
 
 use Database\Connection;
 
@@ -38,32 +39,32 @@ class Auth
 
         $user = $res->fetch_assoc();
 
-        if($user['id'] == null){
-            return null;
-        }
+        return $user;
+    }
+
+    public function getFollow($id)
+    {
 
         $sql = sprintf(
             "SELECT COUNT(followed_id) as follows FROM `follows` WHERE follower_id = %d
-            union
+                union
             SELECT COUNT(follower_id)as follows FROM `follows` WHERE followed_id = %d",
-            $user['id'],$user['id']
+            $id,
+            $id
         );
 
         $res = $this->database->query($sql);
 
-        $follower = $res->fetch_assoc()['follows'];
-        $following = $res->fetch_assoc()['follows'];
+        $follower = $res->fetch_assoc()['follows'] ?? 0;
+        $following = $res->fetch_assoc()['follows'] ?? 0;
 
         if ($res->num_rows == 0)
             return null;
-            
-        return (object)array_merge(
-            (array) $user,
-            (array) [
-                "follower" => $follower, 
-                "following" => $following
-            ]
-        );
+
+        return [
+            'follower' => (int)$follower,
+            'following' => (int)$following
+        ];
     }
 
     public function forgetPassword($email)

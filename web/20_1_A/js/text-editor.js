@@ -10,6 +10,9 @@ let fileEditor = [
 ]
 
 function listFileItem(filename) {
+  if(filename.includes('.html'))
+      filename = filename.substring(0 , filename.indexOf('.html'))
+
   return `<a class="list-group-item list-group-file-item">
   <img src="./assets/html5.png" class="logo" alt="" style="width: 16px;height: 16px;">
   <span class="ml-1 text-truncate">${filename}.html</span>
@@ -31,6 +34,45 @@ function editorTabItems(filename) {
       </div>`
 }
 
+let uploadFiles = []
+
+$("#openFileForm").submit(function (event) {
+  event.preventDefault()
+  fileEditor = [...fileEditor, ...uploadFiles]
+  uploadFiles.forEach(upload => {
+    addEditorTabItemToUI(upload.title)
+    addExplorerItemToUI(upload.title)
+  })
+
+  saveFile()
+
+  $("#modalOpenFile").modal('toggle')
+})
+
+$("#uploadFile").change(function (event) {
+  const files = event.target.files
+
+  uploadFiles = []
+
+  Object.keys(files)
+    .forEach(idx => {
+      var fr = new FileReader();
+      const {name} = files[idx]
+
+      fr.onload = function () {
+        uploadFiles.push({
+          title : name, 
+          content : this.result
+        })  
+      };
+
+      addFileItemToListUI(name)
+      fr.readAsText(files[idx]);
+    });
+
+
+})
+
 $(document).ready(function () {
   if (localStorage.getItem(KEY_FILE)) {
     const fileEditors = JSON.parse(localStorage.getItem(KEY_FILE))
@@ -40,7 +82,6 @@ $(document).ready(function () {
   fileEditor.forEach(file => {
     addEditorTabItemToUI(file.title)
     addExplorerItemToUI(file.title)
-    addFileItemToListUI(file.title)
   })
 
   $(".explorer-items:first-child").addClass('active')
@@ -170,14 +211,21 @@ function loadCodeFromFile() {
 }
 
 function addExplorerItemToUI(filename) {
+  if(filename.includes('.html'))
+    filename = filename.substring(0 , filename.indexOf('.html'))
+
   $(".explorer-content").append(explorerItem(filename))
 }
 
 function addEditorTabItemToUI(filename) {
+  if(filename.includes('.html'))
+    filename = filename.substring(0 , filename.indexOf('.html'))
   $('.editor-tab-container').append(editorTabItems(filename))
 }
 
 function addFileItemToListUI(filename) {
+  if(filename.includes('.html'))
+    filename = filename.substring(0 , filename.indexOf('.html'))
   $("#list-group-open-file").append(listFileItem(filename))
 }
 

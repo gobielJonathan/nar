@@ -1,4 +1,4 @@
-import { fetch , clearPost} from "./post.js";
+import { fetch, clearPost } from "./post.js";
 
 let timer = null
 
@@ -7,8 +7,9 @@ $(document).ready(function () {
         clearTimeout(timer)
 
         timer = setTimeout(() => {
-           clearPost()
-            fetch($(this).val())
-        }, 500);
+            window.location.search = `?q=${$(this).val()}`
+            clearPost()
+            fetch() 
+        }, 800);
     })
- })
+})

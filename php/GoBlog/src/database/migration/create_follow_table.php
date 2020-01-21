@@ -11,13 +11,13 @@ class create_follow_table extends Migrater
         $sql = sprintf("DROP TABLE IF EXISTS %s;", Follow::getInstance()->table);
         $sql .= sprintf(
             "     CREATE TABLE %s (
-                    id INT UNSIGNED DEFAULT uuid(),
+                    id INT AUTO_INCREMENT,
                     follower_id INT NOT NULL,
                     followed_id INT NOT NULL,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     updated_at DATETIME,
                     deleted_at DATETIME,
-                    PRIMARY KEY (follower_id, followed_id)
+                    PRIMARY KEY (`id`,`follower_id`, `followed_id`)
                 );
             ",
             Follow::getInstance()->table

@@ -27,7 +27,7 @@ class Post extends Model
 
     public function add($model)
     {
-        $sql = sprintf("INSERT INTO %s(`content`,`user_id`,`title`)VALUES (?,?,?)");
+        $sql = sprintf("INSERT INTO %s(`content`,`user_id`,`title`)VALUES (?,?,?)", $this->table);
 
         $stmt = $this->database->getConnection()->prepare($sql);
 
@@ -36,9 +36,10 @@ class Post extends Model
         $stmt->execute();
 
         $res = $stmt->get_result();
+
         $stmt->close();
 
-        return $res;
+        return $this->database->getError() ?? "success created";
      }
 
     public function remove($model)

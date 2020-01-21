@@ -3,10 +3,16 @@ import PostTemplate from "./template/post_template.js";
 let isFetching = true;
 let currentPage = 1
 
-fetch() 
+fetch()
 
-export function fetch(query) {
-    let postsHTML = ""; 
+export function fetch() {
+
+    let query = ""
+    if (window.location.search) {
+        query = new URLSearchParams(window.location.search)
+        query = query.get('q')
+    }
+    let postsHTML = "";
 
     isFetching = true
 
@@ -36,9 +42,32 @@ export function fetch(query) {
 
 }
 
-export function clearPost(){
+export function clearPost() {
     $(".posts").empty()
 }
+
+$("#create-post-form").submit(function (event) {
+    event.preventDefault()
+    const user = sessionStorage.getItem('auth') ? JSON.parse(sessionStorage.getItem('auth')) : null
+
+    if (!user) {
+        window.location.href = "/src/resources/views/auth";
+    } else {
+        const payload = {
+            title: event.target.title.value,
+            content: event.target.content.value,
+            user_id: user.id
+        }
+        $.post(`http://localhost:8000/src/api/create-post.php`, payload, function () {
+            currentPage = 1
+            window.location.search = "";
+            clearPost()
+            fetch()
+        })
+    }
+
+})
+
 
 $(window).scroll(function () {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
