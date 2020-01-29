@@ -1,4 +1,6 @@
 export default function PostTemplate(data) {
+    const user = sessionStorage.getItem('auth') ? JSON.parse(sessionStorage.getItem('auth')) : null
+ 
     return `
         <div class="card gedf-card my-2">
             <div class="card-header">
@@ -12,18 +14,10 @@ export default function PostTemplate(data) {
                             <div class="h7 text-muted">${data.fullname}</div>
                         </div>
                     </div>
-                    <div>
-                        <div class="dropdown">
-                            <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                <a class="dropdown-item" href="#">Save</a>
-                                <a class="dropdown-item" href="#">Hide</a>
-                                <a class="dropdown-item" href="#">Report</a>
-                            </div>
-                        </div>
-                    </div>
+                    ${
+                        user && data.already_follow == "0" && data.user_id != user.id ?
+                        `<a data-id=${data.user_id} id=follow-btn class='follow-btn btn btn-primary ml-auto text-white'>Follow<a>` : ``
+                    }
                 </div>
 
             </div>
@@ -44,9 +38,6 @@ export default function PostTemplate(data) {
                     ${data.content.substring(0,300)}
                     ${data.content.length > 300 ? "..." : ""}
                 </p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
             </div>
         </div>
     `

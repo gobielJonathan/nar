@@ -1,100 +1,101 @@
-// import ChatListPersonalTemplate from "../js/template/chat_list_personal.js";
+import ChatListPersonalTemplate from "../js/template/chat_list_personal.js";
+import { BASE_API_URL_SOCKET,BASE_API_URL } from "./constant.js";
 
-// let conn = new WebSocket('ws://localhost:8090');
+let conn = new WebSocket(`ws://${BASE_API_URL_SOCKET}`);
 
-// conn.onopen = function (e) {
-//     console.log("Connection established!");
-// };
+conn.onopen = function (e) {
+    console.log("Connection established!");
+};
 
-// conn.onmessage = function (e) {
-//     const data = JSON.parse(e.data)
+conn.onmessage = function (e) {
+    const data = JSON.parse(e.data)
 
-//     if (data.key === "chats") {
-//         let chatsHTML = createChatList(data);
-//         $(".chat-personal-list").append(chatsHTML)
-//     }
+    if (data.key === "chats") {
+        let chatsHTML = createChatList(data);
+        $(".chat-personal-list").append(chatsHTML)
+    }
 
-//     $(".chat-personal-list").animate({
-//         scrollTop: $(".chat-personal-list").prop("scrollHeight")
-//     }, 50)
+    $(".chat-personal-list").animate({
+        scrollTop: $(".chat-personal-list").prop("scrollHeight")
+    }, 50)
 
-// };
-
-
-// $("#input-chat").keypress(function (e) {
-//     if (e.key === "Enter") {
-//         const auth = sessionStorage.getItem("auth") != null ? JSON.parse(sessionStorage.getItem("auth")) : null;
-//         if (auth == null) {
-//             swal({
-//                 title: "Not Authenticated",
-//                 text: "Please login first...",
-//                 icon: "warning"
-//             })
-//             return
-//         }
-
-//         const msg = {
-//             ...auth,
-//             content: $(this).val()
-//         }
-
-//         $(this).val('')
-//         conn.send(JSON.stringify(msg))
-//     }
-// })
+};
 
 
-// function createChatList(data) {
-//     let chatsHTML = "";
+$("#input-chat").keypress(function (e) {
+    if (e.key === "Enter") {
+        const auth = sessionStorage.getItem("auth") != null ? JSON.parse(sessionStorage.getItem("auth")) : null;
+        if (auth == null) {
+            swal({
+                title: "Not Authenticated",
+                text: "Please login first...",
+                icon: "warning"
+            })
+            return
+        }
 
-//     if (data.chats) {
-//         if (data.chats.length == 0) {
-//             chatsHTML += ChatListPersonalTemplate(data.chats);
-//         } else {
-//             data.chats.reverse();
-//             data.chats.forEach(chat => {
-//                 chatsHTML += ChatListPersonalTemplate(chat);
-//             });
-//         }
-//     }
-//     else {
-//         $("#empty").removeClass('d-flex').addClass('d-none')
-//         if(sessionStorage.getItem('auth')){
-//             if (data.username !== JSON.parse(
-//                 sessionStorage.getItem("auth")
-//             ).username) {
-//                  Snackbar.show({text: `${data.username} sent a message`,pos: 'top-center'})
-//             }
-//         }
-//         chatsHTML = ChatListPersonalTemplate(data);
-//     }
-//     return chatsHTML;
-// }
+        const msg = {
+            ...auth,
+            content: $(this).val()
+        }
+
+        $(this).val('')
+        conn.send(JSON.stringify(msg))
+    }
+})
 
 
-// let currentPage = 1
-// let canFetch = true
+function createChatList(data) {
+    let chatsHTML = "";
 
-// function fetch() {
-//     $.getJSON(`http://localhost:8000/src/api/get-chat.php?page=${currentPage += 1}`, function (data) {
-//         const chats = data.data.data
-//         if (chats.length == 0) {
-//             canFetch = false
-//         } else {
-//             const chatHTML = createChatList({ "chats": chats })
+    if (data.chats) {
+        if (data.chats.length == 0) {
+            chatsHTML += ChatListPersonalTemplate(data.chats);
+        } else {
+            data.chats.reverse();
+            data.chats.forEach(chat => {
+                chatsHTML += ChatListPersonalTemplate(chat);
+            });
+        }
+    }
+    else {
+        $("#empty").removeClass('d-flex').addClass('d-none')
+        if(sessionStorage.getItem('auth')){
+            if (data.username !== JSON.parse(
+                sessionStorage.getItem("auth")
+            ).username) {
+                 Snackbar.show({text: `${data.username} sent a message`,pos: 'top-center'})
+            }
+        }
+        chatsHTML = ChatListPersonalTemplate(data);
+    }
+    return chatsHTML;
+}
 
-//             $(".chat-personal-list").scrollTop(
-//                 $(".chat-personal-list").prop("scrollHeight") / 3
-//             )
-//             $(".chat-personal-list").prepend(chatHTML)
-//         }
 
-//     })
-// }
+let currentPage = 1
+let canFetch = true
 
-// $(".chat-personal-list").scroll(function () {
-//     if ($(this).prop("scrollTop") == 0) {
-//         if (canFetch)
-//             fetch()
-//     }
-// })
+function fetch() {
+    $.getJSON(`http://${BASE_API_URL}/get-chat.php?page=${currentPage += 1}`, function (data) {
+        const chats = data.data.data
+        if (chats.length == 0) {
+            canFetch = false
+        } else {
+            const chatHTML = createChatList({ "chats": chats })
+
+            $(".chat-personal-list").scrollTop(
+                $(".chat-personal-list").prop("scrollHeight") / 3
+            )
+            $(".chat-personal-list").prepend(chatHTML)
+        }
+
+    })
+}
+
+$(".chat-personal-list").scroll(function () {
+    if ($(this).prop("scrollTop") == 0) {
+        if (canFetch)
+            fetch()
+    }
+})

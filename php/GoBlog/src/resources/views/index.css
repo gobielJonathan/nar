@@ -6,3 +6,7 @@
 body{
     font-family: "noto-sans" !important;
 }
+.btn-primary{
+    background-color:  #f6851f !important;
+    border: 0 !important;
+}

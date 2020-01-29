@@ -1,5 +1,5 @@
 export default function CardAccount({username, picture_path, fullname, status}, {follower, following}) {
-    return `<div class="col-md-3 position-sticky" style="top:10px;align-self: flex-start;">
+    return `<div class="col-md-3 position-sticky" style="top:10px;align-self: flex-start;" id=card-account>
         <div class="card">
             <div class="card-body">
                 <div class="h5 d-flex align-items-center">
@@ -13,7 +13,6 @@ export default function CardAccount({username, picture_path, fullname, status}, 
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
                             <a class="dropdown-item" id="logout">Logout</a>
-                            <a class="dropdown-item" href="profile">Profile</a>
                         </div>
                     </div>
                 </div>

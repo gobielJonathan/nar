@@ -1,4 +1,4 @@
-<form class="login100-form validate-form tab-pane fade show active mt-4" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
+<form class="login100-form validate-form tab-pane fade show active mt-4" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab" method="post">
 
     <div class="wrap-input100 validate-input-login" data-validate="Valid username">
         <input class="input100" type="text" id="username" name="username" placeholder="Username">

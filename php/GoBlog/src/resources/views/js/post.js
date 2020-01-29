@@ -1,4 +1,6 @@
 import PostTemplate from "./template/post_template.js";
+import { BASE_API_URL } from "./constant.js";
+import { getFollow } from "./auth.js";
 
 let isFetching = true;
 let currentPage = 1
@@ -18,7 +20,9 @@ export function fetch() {
 
     $(".loader").show()
 
-    const api = `http://localhost:8000/src/api/post.php?page=${currentPage}&q=${query || ""}`;
+    const user = sessionStorage.getItem('auth') ? JSON.parse(sessionStorage.getItem('auth')) : null
+
+    const api = `http://${BASE_API_URL}/post.php?page=${currentPage}&q=${query || ""}&user_id=${user ? user.id : 0}`;
 
     $.getJSON(api, function (res) {
         const posts = res.data.data
@@ -58,7 +62,7 @@ $("#create-post-form").submit(function (event) {
             content: event.target.content.value,
             user_id: user.id
         }
-        $.post(`http://localhost:8000/src/api/create-post.php`, payload, function () {
+        $.post(`http://${BASE_API_URL}/create-post.php`, payload, function () {
             currentPage = 1
             window.location.search = "";
             clearPost()
@@ -75,4 +79,32 @@ $(window).scroll(function () {
         if (!isFetching)
             fetch()
     }
+})
+
+$(".posts").on('click', $("#follow-btn"), function (event) {
+    const idElement = $(event.target).attr('id')
+
+    switch (idElement) {
+        case "follow-btn":
+            event.preventDefault()
+            const toBeFollowId = $(event.target).data('id')
+
+            const user = JSON.parse(sessionStorage.getItem('auth'))
+
+
+            const payload = {
+                followed_id: user.id,
+                follower_id: toBeFollowId
+            }
+
+            $.post(`http://${BASE_API_URL}/add-follow.php`, payload, function () {
+                $(`[data-id=${toBeFollowId}]`).remove()
+                getFollow()
+            })
+            break;
+
+        default:
+            break;
+    }
+
 })

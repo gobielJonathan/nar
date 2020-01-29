@@ -7,21 +7,20 @@ require_once '../../vendor/autoload.php';
 use App\Models\Auth;
 use Util\Responser;
 
-$id = $_GET['id'];
+$follower_id = $_POST['follower_id'];
+$followed_id = $_POST['followed_id'];
 
 if (
-    !isset($id)
+    !isset($followed_id) || 
+    !isset($follower_id)
 ) {
     # code...
     echo Responser::response([
-        "error" => [
-            "username" => "Username must be required",
-            "password" => "Password must be required"
-        ]
+        "error" => "follower id or followed id must be required"
     ]);
     return;
 }
 
 $auth = Auth::getInstance();
 
-echo Responser::response($auth->getFollow($id));
+echo Responser::response($auth->addFollow($follower_id, $followed_id));

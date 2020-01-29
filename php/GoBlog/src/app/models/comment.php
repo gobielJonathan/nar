@@ -21,17 +21,31 @@ class Comment extends Model
     public static function getInstance()
     {
         if (self::$instance == null)
-            self::$instance = new Comment; 
+            self::$instance = new Comment;
         return self::$instance;
     }
 
     public function add($model)
     {
-        $sql = sprintf("INSERT INTO %s(`content`,`user_id`,`title`)VALUES (?,?,?)");
+        var_dump($model);
 
-        $stmt = $this->database->getConnection()->prepare($sql);
+        if ($model['parent_id']) {
+            # code...
 
-        $stmt->bind_param("sds", $model['content'], $model['user_id'], $model['title']);
+            $sql = sprintf("INSERT INTO %s(`content`,`user_id`,`title`, `parent_id`)VALUES (?,?,?,?)", $this->table);
+
+            $stmt = $this->database->getConnection()->prepare($sql);
+
+            $stmt->bind_param("sdsd", $model['content'], $model['user_id'], $model['title'], $model['parent_id']);
+        } else {
+            # code...
+            $sql = sprintf("INSERT INTO %s(`content`,`user_id`,`title`)VALUES (?,?,?)",$this->table);
+
+            $stmt = $this->database->getConnection()->prepare($sql);
+
+            $stmt->bind_param("sds", $model['content'], $model['user_id'], $model['title']);
+        }
+
 
         $stmt->execute();
 
@@ -42,10 +56,12 @@ class Comment extends Model
     }
 
     public function remove($model)
-    { }
+    {
+    }
 
     public function update($model)
-    { }
+    {
+    }
 
     public function gets($query, $page)
     {
@@ -54,7 +70,7 @@ class Comment extends Model
         $res = $this->database->query($sql);
         $this->total_data = $res->fetch_assoc()["total_data"];
 
-        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.parent_id IS NULL AND c.post_id = %d ORDER BY created_at DESC LIMIT %d,%d",$query,  ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
+        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.parent_id IS NULL AND c.post_id = %d ORDER BY created_at DESC LIMIT %d,%d", $query, ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
 
 
         $res = $this->database->query($sql);
@@ -65,13 +81,13 @@ class Comment extends Model
             # code...
             while ($row = $res->fetch_assoc()) {
                 # code...
-                $children[$row['id']]['data'] = $row;          
+                $children[$row['id']]['data'] = $row;
                 $this->getCommentChild($row['id'], $children[$row['id']]);
             }
         }
 
         return $children;
-    } 
+    }
 
     public function getCommentChild($id, &$arr)
     {
@@ -83,15 +99,16 @@ class Comment extends Model
             # code...
             while ($row = $res->fetch_assoc()) {
                 # code...
-                $arr['child'][$row['id']] = $row;          
+                $arr['child'][$row['id']] = $row;
 
                 $this->getCommentChild($row['id'], $arr['child'][$row['id']]);
             }
         } else {
-            $arr['child'] = (object)[];
+            $arr['child'] = (object) [];
         };
     }
 
     public function get($id)
-    { }
+    {
+    }
 }

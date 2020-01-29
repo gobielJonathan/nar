@@ -4,34 +4,34 @@ header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 require_once '../../vendor/autoload.php';
 
-use App\Models\Post;
+use App\Models\Comment;
 use Util\Responser;
 
-$post = Post::getInstance();
+$post = Comment::getInstance();
 
-if (!isset($_POST['content'])) {
+if (!isset($_POST['post_id'])) {
     # code...
     echo Responser::response([
-        'content' => 'must be required'
+        'post_id' => 'must be required'
     ]);
     return;
-} else if (!isset($_POST['user_id'])) {
-    # code...
+} else if(!isset($_POST['user_id'])) {
     echo Responser::response([
         'user_id' => 'must be required'
     ]);
     return;
-} else if(!isset($_POST['title'])) {
+}else if(!isset($_POST['content'])) {
     echo Responser::response([
-        'title' => 'must be required'
+        'content' => 'must be required'
     ]);
     return;
 }
 
 $model = [
     'content' => $_POST['content'],
+    'post_id' => (int)$_POST['post_id'],
     'user_id' => (int)$_POST['user_id'],
-    'title' => $_POST['title']
+    'parent_id' => $_POST['parent_id'] ?? null,
 ];
 
 echo Responser::response($post->add($model));

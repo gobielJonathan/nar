@@ -1,6 +1,8 @@
 <?php
 
 
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, OPTIONS");
 require_once '../../vendor/autoload.php';
 
 use App\Models\User;

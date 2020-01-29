@@ -67,6 +67,18 @@ class Auth
         ];
     }
 
+    public function addFollow($follower_id, $followed_id){
+        $sql = sprintf(
+            "INSERT INTO follows(`follower_id`,`followed_id`) VALUES (%d, %d)",
+            $follower_id,
+            $followed_id
+        );
+
+        $this->database->query($sql);
+
+        return $this->database->getError() ?? "Success follow";
+    }
+
     public function forgetPassword($email)
     { }
 }
