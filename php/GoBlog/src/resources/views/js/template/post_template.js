@@ -30,7 +30,7 @@ export default function PostTemplate(data) {
                 ${
                     new Date(new Date().getTime() - new Date(data.created_at).getTime()).getMinutes()
                 } minutes</div>
-                <a class="card-link" href="comment?id=${data.id}">
+                <a class="card-link" href='comment?id=${data.id}&data=${JSON.stringify(data)}'>
                     <h5 class="card-title">${data.title}</h5>
                 </a>
 

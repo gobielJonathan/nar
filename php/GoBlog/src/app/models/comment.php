@@ -27,32 +27,18 @@ class Comment extends Model
 
     public function add($model)
     {
-        var_dump($model);
+        $sql = "INSERT INTO comments(`content`,`user_id`, `parent_id`,`post_id`)VALUES (?,?,?,?)";
 
-        if ($model['parent_id']) {
-            # code...
+        $stmt = $this->database->getConnection()->prepare($sql);
 
-            $sql = sprintf("INSERT INTO %s(`content`,`user_id`,`title`, `parent_id`)VALUES (?,?,?,?)", $this->table);
-
-            $stmt = $this->database->getConnection()->prepare($sql);
-
-            $stmt->bind_param("sdsd", $model['content'], $model['user_id'], $model['title'], $model['parent_id']);
-        } else {
-            # code...
-            $sql = sprintf("INSERT INTO %s(`content`,`user_id`,`title`)VALUES (?,?,?)",$this->table);
-
-            $stmt = $this->database->getConnection()->prepare($sql);
-
-            $stmt->bind_param("sds", $model['content'], $model['user_id'], $model['title']);
-        }
-
+        $stmt->bind_param("sddd", $model['content'],$model['user_id'],$model['parent_id'],$model['post_id']);
 
         $stmt->execute();
 
         $res = $stmt->get_result();
         $stmt->close();
 
-        return $res;
+        return $this->database->getError() ?? $model;
     }
 
     public function remove($model)
@@ -70,7 +56,7 @@ class Comment extends Model
         $res = $this->database->query($sql);
         $this->total_data = $res->fetch_assoc()["total_data"];
 
-        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.parent_id IS NULL AND c.post_id = %d ORDER BY created_at DESC LIMIT %d,%d", $query, ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
+        $sql = sprintf("SELECT c.*, u.fullname, u.username, u.picture_path FROM comments c JOIN users u ON u.id = c.user_id WHERE c.deleted_at IS NULL AND c.parent_id = -1 AND c.post_id = %d ORDER BY created_at DESC LIMIT %d,%d", $query, ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
 
 
         $res = $this->database->query($sql);

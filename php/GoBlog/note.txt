@@ -1,1 +1,3 @@
 serve backend and front end with different port
+backend port : 8000
+php -q ChatSocket.php -> port 8090

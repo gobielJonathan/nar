@@ -10,3 +10,8 @@ body{
     background-color:  #f6851f !important;
     border: 0 !important;
 }
+
+main{
+    white-space: nowrap;
+    overflow-x: auto;
+}

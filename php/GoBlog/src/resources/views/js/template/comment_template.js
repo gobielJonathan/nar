@@ -27,11 +27,11 @@ export default function CommentTempate(data) {
                             </button>
                         </div>
 
-                        <form action="" class="my-2 collapse" id="form${data.id}">
+                        <form action="" data-parent-comment=${data.id} class="my-2 comment-form collapse hide" id="form${data.id}">
 
                             <div class="form-group">
                                 <label for="input-comment-${data.id}" class="font-weight-bold">Your Comment</label>
-                                <input type="text" name="" id="input-comment-${data.id}" class="form-control" placeholder="" aria-describedby="helpId">
+                                <input type="text" name="content" id="input-comment-${data.id}" class="form-control" placeholder="" aria-describedby="helpId">
                             </div>
         
                             <button type="submit" class="btn btn-primary">Send</button>

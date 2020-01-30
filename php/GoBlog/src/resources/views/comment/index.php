@@ -13,20 +13,20 @@
 <div class="container-fluid gedf-wrapper">
     <div class="row" id="main-row">
 
-        <div class="col-md-9 gedf-main">
+        <div class="col-md-9 gedf-main main">
             <!-- <?php include  "../components/loading.php"; ?> -->
 
             <!-- post content will be retrieve from ajax  -->
 
-            <div id="post"></div>
+            <div class="posts"></div>
 
 
             <div class="comments p-2">
-                <form action="" class="my-2">
+                <form action="" class="my-2 comment-form">
 
                     <div class="form-group">
                         <label for="input-comment" class="font-weight-bold">Your Comment</label>
-                        <input type="text" name="" id="input-comment" class="form-control" placeholder="" aria-describedby="helpId">
+                        <input type="text" name="content" id="input-comment" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Send</button>
@@ -36,7 +36,6 @@
             <div id="comments"></div>
 
         </div>
-
 
     </div>
 </div>
@@ -53,3 +52,5 @@
 
 <script src="js/comment.js" type="module"></script>
 <script src="js/auth.js" type="module"></script>
+<script src="js/filter-post.js" type="module"></script>
+<script src="js/post.js" type="module"></script>

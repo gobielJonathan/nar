@@ -7,9 +7,9 @@ $(document).ready(function () {
         clearTimeout(timer)
 
         timer = setTimeout(() => {
-            window.location.search = `/src/resources/views/?q=${$(this).val()}`
+            window.location.href = `/src/resources/views/?q=${$(this).val()}`
             clearPost()
             fetch() 
         }, 800);
     })
-})
+}) 

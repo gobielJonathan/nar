@@ -22,8 +22,6 @@ export async function getFollow() {
 
         $("#main-row").children("#card-account").remove()
         $("#main-row").prepend(CardAccount(user, data))
-        $(".gedf-main").removeClass("col-md-9")
-        $(".gedf-main").addClass("col-md-6")
         $("#auth-nav").hide()
     }
 

@@ -63,13 +63,16 @@ class Post extends Model
         $this->total_data = $res->fetch_assoc()["total_data"];
 
         $sql = sprintf("SELECT p.*, u.fullname, u.username, u.picture_path,IF( EXISTS(
-            SELECT *
-            from follows f
-            where f.followed_id = %d and f.follower_id = u.id), 1, 0)as already_follow     
-                FROM posts p JOIN users u ON u.id = p.user_id AND (
+                SELECT *
+                from follows f
+                where f.followed_id = %d and f.follower_id = u.id), 1, 0
+            )as already_follow     
+            FROM posts p JOIN users u ON u.id = p.user_id AND (
                 p.title LIKE '%%%s%%' OR
-                p.content LIKE '%%%s%%'
-           )  WHERE p.deleted_at IS NULL ORDER BY created_at DESC LIMIT %d,%d",$query['user_id'], $query['q'], $query['q'], ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
+                p.content LIKE '%%%s%%' 
+           )  WHERE p.deleted_at IS NULL 
+           ORDER BY created_at DESC
+           LIMIT %d,%d",$query['user_id'], $query['q'], $query['q'], ($page - 1) * Pagination::$PER_PAGE, Pagination::$PER_PAGE);
 
 
         $res = $this->database->query($sql);

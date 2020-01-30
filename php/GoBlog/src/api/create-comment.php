@@ -31,7 +31,8 @@ $model = [
     'content' => $_POST['content'],
     'post_id' => (int)$_POST['post_id'],
     'user_id' => (int)$_POST['user_id'],
-    'parent_id' => $_POST['parent_id'] ?? null,
+    'parent_id' => (int)(isset($_POST['parent_id']) && !empty($_POST['parent_id']) ?  $_POST['parent_id'] :  -1),
 ];
+
 
 echo Responser::response($post->add($model));
