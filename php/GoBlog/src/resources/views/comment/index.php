@@ -52,5 +52,4 @@
 
 <script src="js/comment.js" type="module"></script>
 <script src="js/auth.js" type="module"></script>
-<script src="js/filter-post.js" type="module"></script>
-<script src="js/post.js" type="module"></script>
+<!-- <script src="js/filter-post.js" type="module"></script> -->

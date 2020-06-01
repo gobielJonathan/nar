@@ -1,0 +1,6 @@
+.fav{
+    margin:0 3rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap:1rem 1rem;
+}

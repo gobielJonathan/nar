@@ -2,9 +2,7 @@ import CardAccount from "./template/card_account_template.js";
 import { BASE_API_URL } from "./constant.js";
 
 $(document).ready(function () {
-
     getFollow()
-
 })
 
 $("#main-row").on('click', $("#card-account #logout"), function (event) {

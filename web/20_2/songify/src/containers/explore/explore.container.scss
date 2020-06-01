@@ -1,0 +1,37 @@
+@import '../../variables';
+
+.explore {
+    margin-left: 3rem;
+
+    &__title {
+        font-family: 'f-bold-italic';
+        color: white;
+    }
+
+    &__content {
+        white-space: nowrap;
+        display: flex;
+        overflow-x: auto;
+        padding: 1px;
+
+        .music-explore {
+            margin-right: 2rem;
+        }
+    }
+
+    &__last-song {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .54rem .54rem;
+    }
+
+
+    &.light {
+        .explore {
+            &__title {
+                color: $mid_gray;
+            }
+        }
+    }
+
+}

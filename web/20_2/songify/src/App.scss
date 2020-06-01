@@ -1,0 +1,60 @@
+@import './variables';
+
+.bg-shark {
+    background-color: $shark !important;
+}
+
+.bg-cod-gray {
+    background-color: $cod_gray !important;
+}
+
+.bg-mid-gray {
+    background-color: $mid_gray !important;
+}
+
+.bg-doger-blue {
+    background-color: $doger_blue !important;
+}
+
+.bg-pattens_blue {
+    background-color: $pattens_blue !important;
+}
+
+.color-shark {
+    color: $shark !important;
+}
+
+.color-mid-gray {
+    color: $mid_gray !important;
+}
+
+.color-cod-gray {
+    color: $cod_gray !important;
+}
+
+.color-doger-blue {
+    color: $doger_blue !important;
+}
+
+.color-pattens_blue {
+    color: $pattens_blue !important;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+a {
+
+    &:hover,
+    &:focus {
+        text-decoration: none !important;
+    }
+}
+
+.dropdown-toggle {
+    //remvove caret down in dropdown
+    &::after {
+        content: none !important;
+    }
+}

@@ -1,0 +1,14 @@
+@import '../../variables';
+.mood{
+    border-radius: 4px;
+    height: 165px;
+    
+    &.dark{
+        background-color:#25262b !important;
+    }
+
+    &.light{
+        background-color: white;
+        box-shadow: 0 0 0 1px rgba($color: black, $alpha: .1);
+    }
+}

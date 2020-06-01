@@ -16,7 +16,7 @@ if (id != null) {
 $(document).ready(function () {
     if (post) {
         const postTemplate = PostTemplate(JSON.parse(post))
-        $("#post").html(postTemplate)
+        $(".posts").html(postTemplate)
     }
 })
 

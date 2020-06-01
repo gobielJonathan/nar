@@ -1,0 +1,55 @@
+@import './_variables.scss';
+
+@font-face {
+  font-family: 'f-reg';
+  src: url(./assets/fonts/Open_Sans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'f-bold';
+  src: url(./assets/fonts/Open_Sans/OpenSans-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'f-bold-italic';
+  src: url(./assets/fonts/Open_Sans/OpenSans-BoldItalic.ttf);
+}
+
+* {
+  transition: background-color .05s linear,
+    color .05s linear;
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+  color: $mid_gray !important;
+  height: 100%;
+  font-family: 'f-reg' !important;
+  letter-spacing: .8px;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba($color: $mid_gray, $alpha: .2);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $mid_gray;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

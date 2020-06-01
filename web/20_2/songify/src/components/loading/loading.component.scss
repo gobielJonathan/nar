@@ -1,0 +1,17 @@
+@import '../../variables';
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: $doger_blue;
+    box-shadow: 0 0 1px 1.5px rgba($color: white, $alpha: .2);
+    transition: all 1s linear;
+    width: 0;
+    animation: left-to-right 1s linear;
+}
+
+@keyframes left-to-right {  
+    100% {width: 100%;}
+}

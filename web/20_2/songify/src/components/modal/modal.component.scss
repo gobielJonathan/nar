@@ -1,0 +1,22 @@
+@import '../../variables';
+
+.modal {
+
+    &.dark {
+        .modal {
+            &-content {
+                box-shadow: 0 0 15px 0 rgba($color: white, $alpha: .2);
+                background-color: $shark !important;
+                color: white !important;
+            }
+        }
+    }
+
+    &.light {
+        .modal {
+            &-content {
+                color: $shark !important;
+            }
+        }
+    }
+}

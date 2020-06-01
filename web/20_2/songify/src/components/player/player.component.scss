@@ -1,0 +1,81 @@
+@import '../../variables';
+
+.player {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    height: 80px;
+
+
+    &-action {
+        width: 100%;
+        max-width: 300px;
+        padding: 0 2rem;
+        border-right: 1px solid rgba($color: $mid_gray, $alpha: .2);
+    }
+
+    &-detail {
+        width: 100%;
+        padding: 0 2.5rem;
+
+        &__thumbnail {
+            color: inherit;
+            margin-left: 2rem;
+
+            img {
+                width: 36px;
+                height: 36px;
+                border-radius: 4px;
+                object-fit: cover;
+            }
+        }
+    }
+
+    &-seeker {
+        width: 100%;
+        padding: 0 1rem;
+
+        &__track {
+            width: 100%;
+            margin: 0 1rem;
+        }
+    }
+
+    &.light {
+
+
+        &.player {
+            border-top: 1px solid rgba($color: black, $alpha: .1);
+        }
+
+        .player-action {
+            * {
+                color: #3c51fa !important;
+            }
+        }
+
+        .player-detail {
+            * {
+                color: $mid_gray;
+            }
+
+        }
+    }
+
+    &.dark {
+
+        &.player {
+            border-top: 1px solid rgba(104, 105, 110, 0.2);
+            background-color: $shark;
+        }
+
+        .player-detail {
+            &__thumbnail-desc {
+                &__title {
+                    color: white;
+                }
+            }
+        }
+    }
+
+}

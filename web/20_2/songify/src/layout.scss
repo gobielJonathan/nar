@@ -1,0 +1,25 @@
+@import './variables';
+
+.main {
+    height: calc(100% - 80px);
+
+    @media screen and(max-width: $sm_device){
+        &-aside{
+            display: none;
+        }
+    }
+
+    &-aside {
+        width: 30%;
+        max-width: 300px;
+        background: inherit;
+    }
+
+    &-content {
+        overflow-y: auto;
+        background: inherit;
+        width: 100%;
+
+        margin: .7rem 0;
+    }
+}

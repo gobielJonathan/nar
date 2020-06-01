@@ -1,0 +1,21 @@
+.music-explore {
+    display: inline-block;
+    width: 150px;
+
+    &__thumbnail {
+        width: 150px;
+        height: 150px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    &.light{
+        .music-explore{
+            background-color: white;
+            &__title{
+                color: #3c51fa !important;
+                font-weight: bold;
+            }
+        }
+    }
+}

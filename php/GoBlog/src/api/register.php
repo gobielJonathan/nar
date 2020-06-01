@@ -43,7 +43,7 @@ $res =  $user->add([
     "password" => $password
 ]);
 
-if($res == 1    ){
+if($res == 1){
     echo Responser::response([
         "status" => true,
     ]);

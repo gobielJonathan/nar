@@ -1,0 +1,26 @@
+
+.splash-screen {
+    margin: auto;
+    z-index: 4;
+    font-size: 80px;
+    clip-path: inset(0 100% 0 0);
+    animation: text-reveal 2s ease-in-out forwards;
+
+    &__out{
+        animation: fadeOut 1s ease-in-out forwards;
+    }
+
+   
+    
+}
+
+@keyframes fadeOut{
+    to {
+        opacity: 0;
+    }
+}
+@keyframes text-reveal{
+    to{
+        clip-path: inset(0 0 0 0);
+    }
+}
