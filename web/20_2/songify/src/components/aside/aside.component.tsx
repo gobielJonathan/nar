@@ -27,6 +27,11 @@ const Aside : React.FC<IProps> = props => {
                         <span>Favorite</span>
                     </NavLink>
 
+                    <NavLink exact to="/genre" className="aside-section__content-items hover">
+                        <i className="fa fa-music mr-2" aria-hidden="true"></i>
+                        <span>Genre</span>
+                    </NavLink>
+
                 </section>
             </section>
 

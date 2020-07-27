@@ -3,20 +3,24 @@ import Songs from '../utils/dummy/songs.dummy.json'
 import { URL } from '../constant/url';
 import showAlert, { showMixAlert } from '../utils/error';
 
-export const MusicPlayerContext = React.createContext({
-    singer: "",
-    song: "",
-    currentTime: "",
-    percentTime: 0,
-    endTime: "",
-    isPlay: false,
-    playPause: () => { },
-    next: () => { },
-    prev: () => { },
-    setSongIdx: (idx: number) => { },
-    setSingerIdx: (idx: number) => { },
-    seek: (percent: number) => { },
-})
+interface Context {
+    singer: string,
+    song: string,
+    currentTime: string,
+    percentTime: number,
+    endTime: string,
+    isPlay: boolean,
+    playPause: () => void,
+    next: () => void,
+    prev: () => void,
+    setSongIdx: (idx: number) => void,
+    setSingerIdx: (idx: number) => void,
+    seek: (percent: number) => void,
+    onGetSingerIdx : (singer : string) => number,
+    onGetSongIdx : (singer_idx : number, song: string) => number
+}
+
+export const MusicPlayerContext = React.createContext({} as Context)
 
 enum Action {
     NEXT = 1,
@@ -45,22 +49,37 @@ const MusicPlayerProvider: React.FC = props => {
 
 
     useEffect(() => {
-        if ((currSong > -1) && (currSong < Songs[currSinger].songs.length)) {
+        const { singer, songs } = Songs[currSinger];
+
+        if ((currSong >= 0) && (currSong < songs.length)) {
+            audio.pause();
             audio.src = getSongURL(currSinger, currSong);
-            const { singer, songs } = Songs[currSinger]
-            setSinger(singer)
-            setSong(songs[currSong])
+            setSinger(singer);
+            setSong(songs[currSong]);
         }
-        else if (flag == Action.STANDBY || flag == Action.NEXT)
-            setCurrSong(song => song + flag)
+            setIsPlay(play => false);
     }, [currSong, currSinger])
 
     useEffect(() => {
-        audio.addEventListener("timeupdate", () => updateCurrentTime())
+        if(flag == Action.PREV || flag == Action.NEXT){
+            setCurrSong(curr => curr + flag)
+        }
+    }, [flag])
+
+    useEffect(() => {
+        audio.addEventListener("timeupdate", updateCurrentTime)
         return () => {
-            audio.removeEventListener("timeupdate", () => { })
+            audio.removeEventListener("timeupdate", updateCurrentTime)
         }
     }, [])
+
+    const onGetSingerIdx=  (singer : string) => {
+        return Songs.findIndex(data =>data.singer === singer);
+    }
+
+    const onGetSongIdx=(singer_idx : number, song: string) => {
+        return Songs[singer_idx].songs.findIndex(data => data === song);
+    }
 
     function getTimeSongFormat(minute: number, sec: number) {
         let minString: string = minute.toString();
@@ -79,10 +98,10 @@ const MusicPlayerProvider: React.FC = props => {
         const secs = Math.floor(audio.currentTime - mins * 60);
 
         setCurrentTime(getTimeSongFormat(mins, secs))
-        if(audio.ended){
+        if (audio.ended) {
             showAlert({
                 message: `${song} already ended`,
-                title : "Ended",
+                title: "Ended",
                 type: "info"
             })
         }
@@ -91,12 +110,11 @@ const MusicPlayerProvider: React.FC = props => {
 
     function getSongURL(singerIdx: number, songIdx: number): string {
         const { singer, songs } = Songs[singerIdx]
-        return `${URL.MUSIC}${singer}/${singer} -  ${songs[songIdx]}.mp3`
+        return `${URL.MUSIC}${singer}/${singer} - ${songs[songIdx]}.mp3`
     }
 
     function reset() {
         setEndTime("")
-        playPause()
     }
 
     function selectTrack(flag: Action) {
@@ -105,41 +123,41 @@ const MusicPlayerProvider: React.FC = props => {
         reset()
     }
 
+    function play() {
+        audio.play()
+        .then(() => {
+            const mins = Math.floor(audio.duration / 60);
+            const secs = Math.floor(audio.duration - mins * 60);
+
+            setEndTime(getTimeSongFormat(mins, secs))
+
+            showMixAlert({
+                title: `${song} is playing`,
+                type: "info",
+                message: ""
+            });
+        })
+        .catch(err => {
+            showAlert({
+                message: `${song} can't play`,
+                title: "Sorry, Something Error",
+                type: "error"
+            })
+        })
+    }
+
     function playPause() {
         if (audio.paused) {
-            audio.play()
-                .then(() => {
-                    const mins = Math.floor(audio.duration / 60);
-                    const secs = Math.floor(audio.duration - mins * 60);
-
-                    setEndTime(getTimeSongFormat(mins, secs))
-
-                    showMixAlert({
-                        title: `${song} is playing`,
-                        type: "info",
-                        message: ""
-                    });
-                })
-                .catch(err => {
-                    showAlert({
-                        message: `${song} can't play`,
-                        title: "Sorry, Something Error",
-                        type: "error"
-                    })
-                })
+            play();
         }
         else
             audio.pause();
         setIsPlay(play => !play)
     }
 
-    function next() {
-        selectTrack(Action.NEXT)
-    }
+    const next = () => selectTrack(Action.NEXT)
 
-    function prev() {
-        selectTrack(Action.PREV)
-    }
+    const prev = () => selectTrack(Action.PREV)
 
     const setSongIdx = (idx: number) => setCurrSong(idx)
 
@@ -163,7 +181,9 @@ const MusicPlayerProvider: React.FC = props => {
             prev,
             setSongIdx,
             setSingerIdx,
-            seek
+            seek,
+            onGetSingerIdx,
+            onGetSongIdx
         }}>
             {props.children}
         </MusicPlayerContext.Provider>

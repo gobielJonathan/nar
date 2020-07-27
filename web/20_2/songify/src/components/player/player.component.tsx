@@ -39,9 +39,9 @@ const Player: React.FC<IProps> = props => {
             </section>
 
             <section className="player-detail d-flex align-items-center">
-                <Button as="button" className="bg-transparent border-0">
+                {/* <Button as="button" className="bg-transparent border-0">
                     <i className="fa fa-volume-up" aria-hidden="true"></i>
-                </Button>
+                </Button> */}
 
                 <section className="player-detail__thumbnail d-flex">
                     <img src="https://asset-a.grid.id/crop/0x0:0x0/360x240/photo/2018/11/07/4358706.png" alt="" />

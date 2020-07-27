@@ -1,0 +1,92 @@
+{
+    "chill": [
+        {
+            "singer": "Iwan Fals",
+            "songs": [
+                "Guru Oemar Bakri",
+                "Belum Ada Judul"
+            ]
+        },
+        {
+            "singer": "Adithia Sofyan",
+            "songs": [
+                "Adelaide Sky",
+                "Forget Jakarta"
+            ]
+        }
+    ],
+    "indo": [
+        {
+            "singer": "Iwan Fals",
+            "songs": [
+                "Guru Oemar Bakri",
+                "Belum Ada Judul"
+            ]
+        }
+    ],
+    "jazz": [
+        {
+            "singer": "Iwan Fals",
+            "songs": [
+                "Entah",
+                "Kemesraan"
+            ]
+        },
+        {
+            "singer": "Adithia Sofyan",
+            "songs": [
+                "Adelaide Sky"
+            ]
+        }
+    ],
+    "mood": [
+        {
+            "singer": "Iwan Fals",
+            "songs": [
+                "Guru Oemar Bakri",
+                "Belum Ada Judul"
+            ]
+        },
+        {
+            "singer": "Adithia Sofyan",
+            "songs": [
+                "Adelaide Sky"
+            ]
+        }
+    ],
+    "romance": [
+        {
+            "singer": "Iwan Fals",
+            "songs": [
+                "Entah",
+                "Kemesraan",
+                "Kumenanti Seorang Kekasih",
+                "Mimpi Yang Terbeli",
+                "Aku Sayang Kamu"
+            ]
+        }
+    ],
+    "sleep": [
+        {
+            "singer": "Iwan Fals",
+            "songs": [
+                "Tikus-tikus Kantor"
+            ]
+        }
+    ],
+    "soul": [
+        {
+            "singer": "Iwan Fals",
+            "songs": [
+                "Guru Oemar Bakri",
+                "Belum Ada Judul"
+            ]
+        },
+        {
+            "singer": "Adithia Sofyan",
+            "songs": [
+                "Sesuatu Di Jogja"
+            ]
+        }
+    ]
+}

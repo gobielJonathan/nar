@@ -17,7 +17,8 @@ const MusicExplore: React.FC<IProps> = ({
     singerIdx,
     songIdx
 }) => {
-    const { setSingerIdx, setSongIdx } = useContext(MusicPlayerContext)
+
+    const { setSingerIdx, setSongIdx, playPause} = useContext(MusicPlayerContext)
     const { theme } = useContext(ThemeContext)
 
     const classes = classnames('music-explore hover', {
@@ -26,9 +27,8 @@ const MusicExplore: React.FC<IProps> = ({
     })
 
     const onClick = () => {
-        console.log('1231231')
-        setSingerIdx(singerIdx)
-        setSongIdx(songIdx)
+        setSingerIdx(singerIdx);
+        setSongIdx(songIdx);
     }
 
     return (

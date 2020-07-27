@@ -1,7 +1,7 @@
 [
     {
         "singer": "Iwan Fals",
-        "songs" : [
+        "songs": [
             "Guru Oemar Bakri",
             "Belum Ada Judul",
             "Entah",
@@ -22,6 +22,15 @@
             "Sore Tugu Pancoran",
             "Surat Buat Wakil Rakyat",
             "Tikus-tikus Kantor"
+        ]
+    },
+    {
+        "singer": "Adithia Sofyan",
+        "songs": [
+            "8 Tahun",
+            "Adelaide Sky",
+            "Forget Jakarta",
+            "Sesuatu Di Jogja"
         ]
     }
 ]

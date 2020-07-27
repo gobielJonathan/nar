@@ -1,0 +1,33 @@
+.genre {
+    max-height: 200px;
+
+    &.light{
+        box-shadow: 0 0 4px 1px rgba($color: black, $alpha: .2);
+    }
+    &-container {
+        padding: 0 3rem;
+    }
+
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 0 4px 1px rgba($color: white, $alpha: .2);
+    margin-bottom: 1.5rem;
+    display: flex;
+
+    &-content {
+        width: 100%;
+        margin-left: 1.5rem;
+        overflow-y: auto;
+    }
+
+    &-list {
+        padding-left: 4px;
+        &-item{
+            margin-left: .8rem;
+        }
+        &-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    }
+}
